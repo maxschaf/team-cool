@@ -1,23 +1,36 @@
 package com.example.lunchdroid;
 
-import android.os.Bundle;
-import android.app.Activity;
+
+
+
 import android.app.TabActivity;
-import android.view.Menu;
-import android.widget.LinearLayout;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.TabHost;
 
-public class LunchdroidActivity extends Activity{
+public class LunchdroidActivity extends TabActivity {
+	@Override
+	public void onCreate(Bundle icicle) {
+		super.onCreate(icicle);
+		setContentView(R.layout.activity_main);
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
-    //test
+		TabHost tabs = getTabHost();
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }
+		tabs.setup();
+
+		TabHost.TabSpec spec = tabs.newTabSpec("tabdistance");
+
+		Intent intent = new Intent(this, TabDistanceActivity.class);
+		spec.setContent(intent);
+		spec.setIndicator("Distance");
+		tabs.addTab(spec);
+
+		
+		spec = tabs.newTabSpec("tabfavorit");
+		intent = new Intent(this, TabFavoritActivity.class);
+		spec.setContent(intent);
+		spec.setIndicator("Favorit");
+		tabs.addTab(spec);
+
+	}
 }
