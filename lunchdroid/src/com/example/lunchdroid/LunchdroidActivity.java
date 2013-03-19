@@ -2,9 +2,11 @@ package com.example.lunchdroid;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.TabActivity;
 import android.view.Menu;
+import android.widget.LinearLayout;
 
-public class MainActivity extends Activity {
+public class LunchdroidActivity extends Activity{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
