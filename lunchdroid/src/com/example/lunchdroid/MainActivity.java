@@ -1,5 +1,7 @@
 package com.example.lunchdroid;
 
+import com.example.lunchdroid.data.Downloader;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -10,8 +12,13 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        
+        Downloader dl = new Downloader(this);
+        dl.startDownload("http://rss.tugraz.at/menue.xml");
+        
     }
-    //test
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
