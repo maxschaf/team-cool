@@ -21,12 +21,14 @@ public class Downloader {
 		mParent = parent;
 	}
 
-	public void startDownload(String Url) {
+	public void startDownloadString(String Url) {
 		new DownloadToStringTask().execute(Url);
 	}
+	
 
-	private class DownloadToStringTask extends AsyncTask<String, Void, String> {
-
+	// / http://developer.android.com/reference/android/os/AsyncTask.html
+	// -------------------------------------------------------------------------
+	private class DownloadToStringTask extends AsyncTask<String, Integer, String> {
 		@Override
 		// only the first parameter is used
 		protected String doInBackground(String... arg0) {
@@ -35,7 +37,6 @@ public class Downloader {
 				// TextView txt = (TextView)
 				// mParent.findViewById(R.id.idhelloworld);
 				// txt.setText(s);
-
 				Log.w("Lunchdroid", s);
 				return s;
 			} catch (IOException e) {
@@ -43,14 +44,13 @@ public class Downloader {
 			}
 		}
 
-		/// ToDo: we need a global download and parse loading symbol
+		// / ToDo: we need a global download and parse loading symbol
 		protected void onProgressUpdate(Integer... progress) {
 			// setProgressPercent(progress[0]);
 		}
 
-		protected void onPostExecute(Long result) {
+		protected void onPostExecute(String result) {
 			// showDialog("Downloaded " + result + " bytes");
-
 		}
 	}
 
@@ -80,5 +80,9 @@ public class Downloader {
 			}
 		}
 	}
+
+	// -------------------------------------------------------------------------
+
+
 
 }
