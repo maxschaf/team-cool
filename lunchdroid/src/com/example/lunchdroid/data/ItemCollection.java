@@ -19,6 +19,10 @@ public final class ItemCollection {
 			return mItems;
 		}
 	    
+	    public int size(){
+	    	return mItems.size();
+	    }
+	    
 	    public synchronized void addItems(List<Item> items){
 	    	mItems.addAll(items);
 	    }

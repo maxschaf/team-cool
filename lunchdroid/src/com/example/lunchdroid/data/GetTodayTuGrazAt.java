@@ -24,11 +24,20 @@ public class GetTodayTuGrazAt {
 	private final Activity mParent;
 	private final String mUrl = "http://rss.tugraz.at/menue.xml";
 	private final Integer mDays = 1;
+	private AsyncTask<String, Integer, List<Item>> mAt;
 
 	public GetTodayTuGrazAt(Activity parent) {
 		mParent = parent;
 
-		AsyncTask<String, Integer, List<Item>> at = startDownloadStream();
+		mAt = startDownloadStream();
+	}
+
+	public boolean hasFinished() {
+		if (AsyncTask.Status.FINISHED == mAt.getStatus()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private AsyncTask<String, Integer, List<Item>> startDownloadStream() {
@@ -52,7 +61,7 @@ public class GetTodayTuGrazAt {
 				return null;
 			} catch (XmlPullParserException e) {
 				return null;
-			} 
+			}
 		}
 
 		// / ToDo: we need a global download and parse loading symbol
@@ -61,7 +70,7 @@ public class GetTodayTuGrazAt {
 		}
 
 		protected void onPostExecute(List<Item> result) {
-			// showDialog("Downloaded " + result + " bytes");
+			Log.w("Lunchdroid", "Finished.");
 		}
 	}
 
@@ -81,8 +90,8 @@ public class GetTodayTuGrazAt {
 
 	}
 
-	private List<Item> parse(InputStream in, int days) throws XmlPullParserException,
-			IOException {
+	private List<Item> parse(InputStream in, int days)
+			throws XmlPullParserException, IOException {
 		try {
 			XmlPullParser parser = Xml.newPullParser();
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
