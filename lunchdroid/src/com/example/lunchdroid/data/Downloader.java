@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 import com.example.lunchdroid.R;
 
@@ -21,8 +22,18 @@ public class Downloader {
 		mParent = parent;
 	}
 
-	public void startDownloadString(String Url) {
-		new DownloadToStringTask().execute(Url);
+	public String startDownloadString(String Url) {
+		AsyncTask<String,Integer,String> dl = new DownloadToStringTask().execute(Url);
+		try {
+			return dl.get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 

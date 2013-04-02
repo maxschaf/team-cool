@@ -104,7 +104,7 @@ public class GetTodayTuGrazAt {
 		while (eventType != XmlPullParser.END_DOCUMENT && days > 0) {
 			if (eventType == XmlPullParser.START_TAG) {
 				String name = parser.getName();
-				// Starts by looking for the entry tag
+				// Starts by looking for the item tag
 				if (name.equals("item")) {
 					days--;
 					items.addAll(readEntry(parser));
