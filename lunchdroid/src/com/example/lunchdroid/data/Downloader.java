@@ -43,16 +43,18 @@ public class Downloader {
 		@Override
 		// only the first parameter is used
 		protected String doInBackground(String... arg0) {
+			String s;
 			try {
-				String s = downloadString(arg0[0]);
+				 s = downloadString(arg0[0]);
 				// TextView txt = (TextView)
 				// mParent.findViewById(R.id.idhelloworld);
 				// txt.setText(s);
 				Log.w("Lunchdroid", s);
-				return s;
+				
 			} catch (IOException e) {
 				return "CONNECTION ERROR";
 			}
+			return s;
 		}
 
 		// / ToDo: we need a global download and parse loading symbol

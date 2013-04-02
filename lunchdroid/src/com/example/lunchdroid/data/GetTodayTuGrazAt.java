@@ -50,25 +50,30 @@ public class GetTodayTuGrazAt {
 		// only the first parameter is used
 		protected List<Item> doInBackground(String... arg0) {
 			InputStream in = null;
+			List<Item> list;
 			try {
 				in = getStream(arg0[0]);
-				Log.w("Lunchdroid", "Stream ready.");
+				// Log.w("Lunchdroid", "Stream ready.");
 
-				List<Item> list = parse(in, Integer.parseInt(arg0[1]));
+				list = parse(in, Integer.parseInt(arg0[1]));
 				ItemCollection.getInstance().addItems(list);
-				return list;
+
 			} catch (IOException e) {
+				e.printStackTrace();
 				return null;
 			} catch (XmlPullParserException e) {
+				e.printStackTrace();
 				return null;
 			}
+			return list;
 		}
 
 		// / ToDo: we need a global download and parse loading symbol
+		@Override
 		protected void onProgressUpdate(Integer... progress) {
 			// setProgressPercent(progress[0]);
 		}
-
+		@Override
 		protected void onPostExecute(List<Item> result) {
 			Log.w("Lunchdroid", "Finished.");
 		}
@@ -99,8 +104,8 @@ public class GetTodayTuGrazAt {
 			parser.nextTag();
 			return readFeed(parser, days);
 		} finally {
-//			if (in != null)
-//				in.close();
+			// if (in != null)
+			// in.close();
 		}
 	}
 
@@ -108,7 +113,7 @@ public class GetTodayTuGrazAt {
 			throws XmlPullParserException, IOException {
 		List<Item> items = new ArrayList<Item>();
 
-//		parser.require(XmlPullParser.START_TAG, "", "rss");
+		// parser.require(XmlPullParser.START_TAG, "", "rss");
 		int eventType = parser.getEventType();
 		while (eventType != XmlPullParser.END_DOCUMENT && days > 0) {
 			if (eventType == XmlPullParser.START_TAG) {
@@ -127,7 +132,7 @@ public class GetTodayTuGrazAt {
 
 	private List<Item> readEntry(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
-//		parser.require(XmlPullParser.START_TAG, "", "item");
+		// parser.require(XmlPullParser.START_TAG, "", "item");
 		String description = null;
 		String pubDate = null;
 
