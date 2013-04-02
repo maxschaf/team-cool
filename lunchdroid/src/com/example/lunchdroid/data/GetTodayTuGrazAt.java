@@ -99,8 +99,8 @@ public class GetTodayTuGrazAt {
 			parser.nextTag();
 			return readFeed(parser, days);
 		} finally {
-			if (in != null)
-				in.close();
+//			if (in != null)
+//				in.close();
 		}
 	}
 
@@ -108,7 +108,7 @@ public class GetTodayTuGrazAt {
 			throws XmlPullParserException, IOException {
 		List<Item> items = new ArrayList<Item>();
 
-		parser.require(XmlPullParser.START_TAG, "", "rss");
+//		parser.require(XmlPullParser.START_TAG, "", "rss");
 		int eventType = parser.getEventType();
 		while (eventType != XmlPullParser.END_DOCUMENT && days > 0) {
 			if (eventType == XmlPullParser.START_TAG) {
@@ -127,7 +127,7 @@ public class GetTodayTuGrazAt {
 
 	private List<Item> readEntry(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
-		parser.require(XmlPullParser.START_TAG, "", "item");
+//		parser.require(XmlPullParser.START_TAG, "", "item");
 		String description = null;
 		String pubDate = null;
 
