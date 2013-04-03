@@ -57,7 +57,7 @@ public class GetTodayTuGrazAt {
 
 				list = parse(in, Integer.parseInt(arg0[1]));
 				ItemCollection.getInstance().addItems(list);
-
+				in.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 				return null;
@@ -73,6 +73,7 @@ public class GetTodayTuGrazAt {
 		protected void onProgressUpdate(Integer... progress) {
 			// setProgressPercent(progress[0]);
 		}
+
 		@Override
 		protected void onPostExecute(List<Item> result) {
 			Log.w("Lunchdroid", "Finished.");
@@ -104,8 +105,8 @@ public class GetTodayTuGrazAt {
 			parser.nextTag();
 			return readFeed(parser, days);
 		} finally {
-			// if (in != null)
-			// in.close();
+			if (in != null)
+				in.close();
 		}
 	}
 
@@ -153,6 +154,7 @@ public class GetTodayTuGrazAt {
 			}
 			eventType = parser.next();
 		}
+
 		return extractItems(description, pubDate);
 	}
 

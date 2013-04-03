@@ -23,7 +23,8 @@ public class Downloader {
 	}
 
 	public String startDownloadString(String Url) {
-		AsyncTask<String,Integer,String> dl = new DownloadToStringTask().execute(Url);
+		AsyncTask<String, Integer, String> dl = new DownloadToStringTask()
+				.execute(Url);
 		try {
 			return dl.get();
 		} catch (InterruptedException e) {
@@ -35,22 +36,22 @@ public class Downloader {
 		}
 		return null;
 	}
-	
 
 	// / http://developer.android.com/reference/android/os/AsyncTask.html
 	// -------------------------------------------------------------------------
-	private class DownloadToStringTask extends AsyncTask<String, Integer, String> {
-		@Override
+	private class DownloadToStringTask extends
+			AsyncTask<String, Integer, String> {
 		// only the first parameter is used
+		@Override
 		protected String doInBackground(String... arg0) {
 			String s;
 			try {
-				 s = downloadString(arg0[0]);
+				s = downloadString(arg0[0]);
 				// TextView txt = (TextView)
 				// mParent.findViewById(R.id.idhelloworld);
 				// txt.setText(s);
 				Log.w("Lunchdroid", s);
-				
+
 			} catch (IOException e) {
 				return "CONNECTION ERROR";
 			}
@@ -58,17 +59,22 @@ public class Downloader {
 		}
 
 		// / ToDo: we need a global download and parse loading symbol
+		@Override
 		protected void onProgressUpdate(Integer... progress) {
 			// setProgressPercent(progress[0]);
 		}
 
+		@Override
 		protected void onPostExecute(String result) {
-			// showDialog("Downloaded " + result + " bytes");
+			Log.w("Lunchdroid", result);
 		}
 	}
 
 	private String downloadString(String Url) throws IOException {
 		InputStream stream = null;
+		BufferedReader r = null;
+		StringBuilder total;
+		InputStreamReader reader = null;
 		try {
 			URL url = new URL(Url);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -79,8 +85,9 @@ public class Downloader {
 
 			conn.connect();
 			stream = conn.getInputStream();
-			BufferedReader r = new BufferedReader(new InputStreamReader(stream));
-			StringBuilder total = new StringBuilder(stream.available());
+			reader = new InputStreamReader(stream);
+			r = new BufferedReader(reader);
+			total = new StringBuilder(stream.available());
 			String line;
 			while ((line = r.readLine()) != null) {
 				total.append(line);
@@ -88,6 +95,12 @@ public class Downloader {
 			return total.toString();
 
 		} finally {
+			if(reader != null){
+				reader.close();
+			}
+			if (r != null) {
+				r.close();
+			}
 			if (stream != null) {
 				stream.close();
 			}
@@ -95,7 +108,5 @@ public class Downloader {
 	}
 
 	// -------------------------------------------------------------------------
-
-
 
 }
