@@ -59,7 +59,7 @@ public class GetTodayTuGrazAt {
 				.execute(mUrlMenuByDayXml);
 	}
 
-	private InputStream getStream(String Url) throws IOException {
+	private synchronized InputStream getStream(String Url) throws IOException {
 		InputStream stream = null;
 
 		URL url = new URL(Url);
@@ -158,8 +158,10 @@ public class GetTodayTuGrazAt {
 									String dayname = parser.getAttributeValue(
 											"", "name");
 									readEntry(parser, dayname);
-									if (parser.getName().equals("day")) {
-										continue;
+									if (parser.getName() != null) {
+										if (parser.getName().equals("day")) {
+											continue;
+										}
 									}
 								}
 							}

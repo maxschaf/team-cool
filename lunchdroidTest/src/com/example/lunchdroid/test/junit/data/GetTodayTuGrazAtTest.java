@@ -11,9 +11,7 @@ public class GetTodayTuGrazAtTest extends TestCase {
 	private GetTodayTuGrazAt tug;
 	
 	protected void setUp() throws Exception {
-		super.setUp();
-		
-		tug = new GetTodayTuGrazAt(null);
+		super.setUp();		
 	}
 
 	protected void tearDown() throws Exception {
@@ -25,7 +23,7 @@ public class GetTodayTuGrazAtTest extends TestCase {
 
 		Date now = new Date();
 		Date max = new Date(now.getTime() + 60000);
-
+		tug = new GetTodayTuGrazAt(null);
 		tug.startDownloadMenuXml();
 		
 		while (!tug.hasFinishedMenuXml() && !now.after(max)) {
@@ -41,7 +39,7 @@ public class GetTodayTuGrazAtTest extends TestCase {
 
 		Date now = new Date();
 		Date max = new Date(now.getTime() + 60000);
-
+		tug = new GetTodayTuGrazAt(null);
 		tug.startDownloadMenuByDayXml();
 		
 		while (!tug.hasFinishedMenuByDayXml() && !now.after(max)) {
