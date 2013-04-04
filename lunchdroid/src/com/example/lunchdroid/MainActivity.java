@@ -7,8 +7,8 @@ import java.util.concurrent.ExecutionException;
 
 import com.example.lunchdroid.data.Downloader;
 import com.example.lunchdroid.data.GetTodayTuGrazAt;
-import com.example.lunchdroid.data.Item;
-import com.example.lunchdroid.data.ItemCollection;
+import com.example.lunchdroid.data.Restaurant;
+import com.example.lunchdroid.data.RestaurantCollection;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,11 +24,12 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		GetTodayTuGrazAt dl = new GetTodayTuGrazAt(this);
+		dl.startDownloadMenuByDayXml();
+ 
 
 		while (true) {
 			Log.w("Lunchdroid",
-					String.valueOf(ItemCollection.getInstance().getItems()
-							.size()) + " items in ItemsCollection.");
+					String.valueOf(RestaurantCollection.getInstance().size()) + " items in ItemsCollection.");
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
