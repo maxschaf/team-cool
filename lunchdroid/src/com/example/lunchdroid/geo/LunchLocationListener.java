@@ -1,16 +1,27 @@
 package com.example.lunchdroid.geo;
 
+import com.example.lunchdroid.data.ItemCollection;
+
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 
 public class LunchLocationListener implements LocationListener {
 
 	
 	@Override
-	public void onLocationChanged(Location location) {
-		
+	public void onLocationChanged(Location loc) {
+		loc.getLatitude();
+
+		loc.getLongitude();
+
+		String text = "loc: " + loc.getLatitude() +" "+ loc.getLongitude();
+				
+		Log.w("Lunchdroid",text);
+		System.out.println(text);
 		// copied....
 		 //editLocation.setText("");  
 	     //pb.setVisibility(View.INVISIBLE);  
