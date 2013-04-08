@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 
 		Locator.getInstance(this).startLocationListener();
 		if(Locator.getInstance(this).getMyLocation() != null){
-			Log.w("Lunchdroid", "Distanz: " + String.valueOf(Locator.getInstance().getDistance("Lichendorf 9 8473")));
+			Log.w("Lunchdroid", "Distanz: " + String.valueOf(Locator.getInstance().getDistance("Austraﬂe 8 8480 Mureck")));
 			
 		}
 
