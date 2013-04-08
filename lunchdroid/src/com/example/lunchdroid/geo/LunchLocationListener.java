@@ -11,17 +11,11 @@ public class LunchLocationListener implements LocationListener {
 	
 	@Override
 	public void onLocationChanged(Location loc) {
-		loc.getLatitude();
-
-		loc.getLongitude();
-
 		String text = "loc: " + loc.getLatitude() +" "+ loc.getLongitude();
-				
 		Log.w("Lunchdroid",text);
-		System.out.println(text);
-		
-		Locator.getInstance().doReverseGeocoding(loc);
-		
+
+		Locator.getInstance().setMyLocation(loc);
+		Locator.getInstance().doReverseGeocoding(loc);		
 	}
 
 	@Override

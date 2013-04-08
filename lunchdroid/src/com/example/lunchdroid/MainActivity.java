@@ -33,24 +33,23 @@ public class MainActivity extends Activity {
 
 		// GetTodayTuGrazAt dl = new GetTodayTuGrazAt(this);
 
-		// while (true) {
+
 		Log.w("Lunchdroid",
 				String.valueOf(ItemCollection.getInstance().getItems().size())
 						+ " items in ItemsCollection.");
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// }
 
+
+	
 	}
 	@Override
     protected void onStart() {
         super.onStart();
 
 		Locator.getInstance(this).startLocationListener();
+		if(Locator.getInstance(this).getMyLocation() != null){
+			Log.w("Lunchdroid", "Distanz: " + String.valueOf(Locator.getInstance().getDistance("Lichendorf 9 8473")));
+			
+		}
 
     }
 	@Override
