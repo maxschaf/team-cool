@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import android.util.Log;
+
 //Speichert alle Items, Singleton!
 public final class RestaurantCollection {
 
@@ -15,7 +17,7 @@ public final class RestaurantCollection {
 		mItems = new HashMap<Date, List<Restaurant>>();
 	}
 
-	// kritisch für nebenläufigkeit, sollte abstrakter gehalten werden
+	// kritisch fï¿½r nebenlï¿½ufigkeit, sollte abstrakter gehalten werden
 
 	public int size() {
 		return mItems.size();
@@ -26,6 +28,9 @@ public final class RestaurantCollection {
 			mItems.put(key, new ArrayList<Restaurant>());
 		}
 		mItems.get(key).add(value);
+		Log.w("Lunchdroid",
+				String.valueOf(size()) + " items in RestaurantCollection.");
+
 	}
 
 	public synchronized static RestaurantCollection getInstance() {
