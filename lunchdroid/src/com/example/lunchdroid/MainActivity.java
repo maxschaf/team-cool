@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				// TODO Auto-generated catch block...
 				e.printStackTrace();
 			}
 	
@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
 
 		Locator.getInstance(this).startLocationListener();
 		if(Locator.getInstance(this).getMyLocation() != null){
-			Log.w("Lunchdroid", "Distanz: " + String.valueOf(Locator.getInstance().getDistance("Austraße 8 8480 Mureck")));
+			Log.w("Lunchdroid", "Distanz: " + String.valueOf(Locator.getInstance().getDistance("Austraï¿½e 8 8480 Mureck")));
 			
 		}
 
