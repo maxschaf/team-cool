@@ -299,6 +299,7 @@ public final class Locator {
 	}
 	
 
+	// TODO Das mit übergebenem Context muss verbessert werden!
 	public static Locator getInstance(MainActivity context) {
 		mContext = context;
 		if (mInstance == null) {
