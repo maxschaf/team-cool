@@ -21,7 +21,7 @@ public class LunchdroidActivity extends TabActivity {
 		GetTodayTuGrazAt dl = new GetTodayTuGrazAt(this);
 		dl.startDownloadMenuByDayXml();
 		
-		TabHost tabs = getTabHost();
+		TabHost tabs = getTabHost(); 
 
 		tabs.setup();
 

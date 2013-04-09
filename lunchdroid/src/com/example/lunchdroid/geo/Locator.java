@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import com.example.lunchdroid.LunchdroidActivity;
 import com.example.lunchdroid.R;
 
 import android.app.Activity;
@@ -282,7 +283,7 @@ public final class Locator {
 		// your application to the Home screen.
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(mContext);
 		// Adds the back stack for the Intent (but not the Intent itself)
-		stackBuilder.addParentStack(Activity.class);
+		stackBuilder.addParentStack(LunchdroidActivity.class);
 		// Adds the Intent that starts the Activity to the top of the stack
 		stackBuilder.addNextIntent(resultIntent);
 		PendingIntent resultPendingIntent =
