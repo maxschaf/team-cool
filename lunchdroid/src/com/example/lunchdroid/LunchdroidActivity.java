@@ -3,9 +3,13 @@ package com.example.lunchdroid;
 
 
 
+import com.example.lunchdroid.data.GetTodayTuGrazAt;
+import com.example.lunchdroid.geo.Locator;
+
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TabHost;
 
 public class LunchdroidActivity extends TabActivity {
@@ -14,6 +18,9 @@ public class LunchdroidActivity extends TabActivity {
 		super.onCreate(icicle);
 		setContentView(R.layout.activity_main);
 
+		GetTodayTuGrazAt dl = new GetTodayTuGrazAt(this);
+		dl.startDownloadMenuByDayXml();
+		
 		TabHost tabs = getTabHost();
 
 		tabs.setup();
@@ -33,4 +40,16 @@ public class LunchdroidActivity extends TabActivity {
 		tabs.addTab(spec);
 
 	}
+	
+	@Override
+    protected void onStart() {
+        super.onStart();
+
+		Locator.getInstance(this).startLocationListener();
+		if(Locator.getInstance(this).getMyLocation() != null){
+			Log.w("Lunchdroid", "Distanz: " + String.valueOf(Locator.getInstance().getDistance("Austra�e 8 8480 Mureck")));
+			
+		}
+
+    }
 }

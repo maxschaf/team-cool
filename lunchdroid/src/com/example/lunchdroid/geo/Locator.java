@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import com.example.lunchdroid.MainActivity;
 import com.example.lunchdroid.R;
+
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -29,7 +30,7 @@ public final class Locator {
 	private static Locator mInstance;
 	private LocationManager mLocationManager;
 	private LocationListener mLocationListener;
-	private static MainActivity mContext;
+	private static Activity mContext;
 	private boolean mGpsEnabled;
 	private boolean mOrtungEnabled;
 	private Location mMyLocation;
@@ -70,7 +71,7 @@ public final class Locator {
 
 		String toastText;
 		if (!mGpsEnabled && mOrtungEnabled) {
-			toastText = "Für genauere Ortsbestimmung GPS einschalten.";
+			toastText = "Fï¿½r genauere Ortsbestimmung GPS einschalten.";
 			Toast.makeText(mContext, toastText, Toast.LENGTH_LONG).show();
 		} else if (!mGpsEnabled && !mOrtungEnabled) {
 			toastText = "Keine Ortsbestimmung eingeschalten.";
@@ -79,7 +80,7 @@ public final class Locator {
 			LocalisationNotification();
 		}
 
-		// TOdo in die Setting, Schnellverknüpfung um GPS einzuschalten oder
+		// TOdo in die Setting, Schnellverknï¿½pfung um GPS einzuschalten oder
 		// Notification
 		// Intent intent = new
 		// Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -136,7 +137,7 @@ public final class Locator {
 			Location loc = params[0];
 			List<Address> addresses = null;
 			try {
-				// GeoCoder funktioniert nur wenn Google Play Services verfügbar
+				// GeoCoder funktioniert nur wenn Google Play Services verfï¿½gbar
 				// sind
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD
 						&& Geocoder.isPresent()) {
@@ -169,7 +170,7 @@ public final class Locator {
 		}
 
 		private void makeToast(final String message) {
-			((MainActivity) mContext).runOnUiThread(new Runnable() {
+			((Activity) mContext).runOnUiThread(new Runnable() {
 				public void run() {
 
 					Toast.makeText(mContext, message, Toast.LENGTH_SHORT)
@@ -281,7 +282,7 @@ public final class Locator {
 		// your application to the Home screen.
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(mContext);
 		// Adds the back stack for the Intent (but not the Intent itself)
-		stackBuilder.addParentStack(MainActivity.class);
+		stackBuilder.addParentStack(Activity.class);
 		// Adds the Intent that starts the Activity to the top of the stack
 		stackBuilder.addNextIntent(resultIntent);
 		PendingIntent resultPendingIntent =
@@ -299,8 +300,8 @@ public final class Locator {
 	}
 	
 
-	// TODO Das mit übergebenem Context muss verbessert werden!
-	public static Locator getInstance(MainActivity context) {
+	// TODO Das mit ï¿½bergebenem Context muss verbessert werden!
+	public static Locator getInstance(Activity context) {
 		mContext = context;
 		if (mInstance == null) {
 			mInstance = new Locator();
