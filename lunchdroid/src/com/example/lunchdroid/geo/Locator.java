@@ -72,7 +72,7 @@ public final class Locator {
 
 		String toastText;
 		if (!mGpsEnabled && mOrtungEnabled) {
-			toastText = "F�r genauere Ortsbestimmung GPS einschalten.";
+			toastText = "Für genauere Ortsbestimmung GPS einschalten.";
 			Toast.makeText(mContext, toastText, Toast.LENGTH_LONG).show();
 		} else if (!mGpsEnabled && !mOrtungEnabled) {
 			toastText = "Keine Ortsbestimmung eingeschalten.";

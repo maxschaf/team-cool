@@ -15,4 +15,20 @@ public class Restaurant {
         this.restaurantTelefon = restaurantTelefon;
         this.restaurantLunch = restaurantLunch;
     }
+
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+
+	public String getRestaurantAddress() {
+		return restaurantAddress;
+	}
+
+	public String getRestaurantTelefon() {
+		return restaurantTelefon;
+	}
+
+	public ArrayList<Lunch> getRestaurantLunch() {
+		return restaurantLunch;
+	}
 }

@@ -12,7 +12,12 @@ public final class RestaurantCollection {
 
 	private static RestaurantCollection mInstance;
 	private HashMap<Date, List<Restaurant>> mItems;
-
+	
+	private final Object lock = new Object();
+	
+	private boolean ready = false;
+	
+	
 	private RestaurantCollection() {
 		mItems = new HashMap<Date, List<Restaurant>>();
 	}
@@ -31,6 +36,31 @@ public final class RestaurantCollection {
 		Log.w("Lunchdroid",
 				String.valueOf(size()) + " items in RestaurantCollection.");
 
+	}
+	
+	public List<Restaurant> getRestaurantsByDay(Date day){
+		synchronized(lock){
+		    while (!this.ready){
+		        try {
+					lock.wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    }
+		}
+		if(mItems.containsKey(day)){
+			return mItems.get(day);
+		}
+		return null;
+	}
+	
+	protected void finishedAddingData(){
+		synchronized(lock){
+		    //set ready flag to true (so isReady returns true)
+		    ready = true;
+		    lock.notifyAll();
+		}
 	}
 
 	public synchronized static RestaurantCollection getInstance() {

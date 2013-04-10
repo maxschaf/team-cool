@@ -93,7 +93,9 @@ public class GetTodayTuGrazAt {
 				parse(in);
 				// ItemCollection.getInstance().addItems(list);
 				in.close();
-
+				
+				// todo da momentan nur eine datenquelle reicht das so.
+				RestaurantCollection.getInstance().finishedAddingData();
 			} catch (IOException e) {
 				e.printStackTrace();
 				return false;
