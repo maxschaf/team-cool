@@ -39,19 +39,20 @@ public final class RestaurantCollection {
 
 	}
 	
+	//blocking!
 	public List<Restaurant> getRestaurantsByDay(Date day){
 		isDataReady();
 		
 		if(mItems.containsKey(day)){
 			HashMap<Integer, Restaurant> r = mItems.get(day);
 			ArrayList<Restaurant> valuesList = new ArrayList<Restaurant>(r.values());
-			
-			
-			return valuesList;//(Restaurant[]) mItems.get(day)..values().toArray();
+						
+			return valuesList;
 		}
 		return null;
 	}
 	
+	//blocking!
 	public Restaurant getRestaurantByDayAndId(Date day, int id){
 		isDataReady();
 		if(mItems.containsKey(day)){

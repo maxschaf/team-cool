@@ -9,8 +9,17 @@ public class Restaurant {
     private final String restaurantTelefon;
     private final ArrayList<Lunch> restaurantLunch;
     private final int restaurantId;
+    private int restaurantDistance;
 
-    public Restaurant(String restaurantName, String restaurantAddress, String restaurantTelefon, ArrayList<Lunch> restaurantLunch) {
+    public int getRestaurantDistance() {
+		return restaurantDistance;
+	}
+
+	public void setRestaurantDistance(int restaurantDistance) {
+		this.restaurantDistance = restaurantDistance;
+	}
+
+	public Restaurant(String restaurantName, String restaurantAddress, String restaurantTelefon, ArrayList<Lunch> restaurantLunch) {
         this.restaurantName = restaurantName;
         this.restaurantAddress = restaurantAddress;
         this.restaurantTelefon = restaurantTelefon;
