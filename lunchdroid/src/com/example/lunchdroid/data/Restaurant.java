@@ -15,7 +15,7 @@ public class Restaurant {
         this.restaurantAddress = restaurantAddress;
         this.restaurantTelefon = restaurantTelefon;
         this.restaurantLunch = restaurantLunch;
-        this.restaurantId = RestaurantCollection.getInstance().getNewId();
+        this.restaurantId = RestaurantCollection.getInstance().getNewId();  
     }
 
 	public int getRestaurantId() {
