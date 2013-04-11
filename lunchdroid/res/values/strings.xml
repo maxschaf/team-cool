@@ -1,7 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">lunchdroid</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Lunchdroid</string>
+    <string name="title_activity_contact">Kontaktübersicht</string>
+    <string name="action_settings">Settings</string>
+    <string name="contact_view">Das ist die Kontaktübersicht</string>
+    <string name="title_activity_phone_call">PhoneCall</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
