@@ -8,13 +8,19 @@ public class Restaurant {
     private final String restaurantAddress;
     private final String restaurantTelefon;
     private final ArrayList<Lunch> restaurantLunch;
+    private final int restaurantId;
 
     public Restaurant(String restaurantName, String restaurantAddress, String restaurantTelefon, ArrayList<Lunch> restaurantLunch) {
         this.restaurantName = restaurantName;
         this.restaurantAddress = restaurantAddress;
         this.restaurantTelefon = restaurantTelefon;
         this.restaurantLunch = restaurantLunch;
+        this.restaurantId = RestaurantCollection.getInstance().getNewId();
     }
+
+	public int getRestaurantId() {
+		return restaurantId;
+	}
 
 	public String getRestaurantName() {
 		return restaurantName;
