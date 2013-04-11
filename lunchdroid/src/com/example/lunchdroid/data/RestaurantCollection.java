@@ -1,6 +1,7 @@
 package com.example.lunchdroid.data;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,18 +12,18 @@ import android.util.Log;
 public final class RestaurantCollection {
 
 	private static RestaurantCollection mInstance;
-	private HashMap<Date, List<Restaurant>> mItems;
-	
+	private HashMap<Date, HashMap<Integer, Restaurant>> mItems;
+	private int mRestaurantId = -1;
 	private final Object lock = new Object();
 	
 	private boolean ready = false;
 	
 	
 	private RestaurantCollection() {
-		mItems = new HashMap<Date, List<Restaurant>>();
+		mItems = new HashMap<Date, HashMap<Integer, Restaurant>>();
 	}
 
-	// kritisch f�r nebenl�ufigkeit, sollte abstrakter gehalten werden
+	// kritisch für nebenläufigkeit, sollte abstrakter gehalten werden
 
 	public int size() {
 		return mItems.size();
@@ -30,15 +31,39 @@ public final class RestaurantCollection {
 
 	public synchronized void addItem(Date key, Restaurant value) {
 		if (!mItems.containsKey(key)) {
-			mItems.put(key, new ArrayList<Restaurant>());
+			mItems.put(key, new HashMap<Integer,Restaurant>());
 		}
-		mItems.get(key).add(value);
+		mItems.get(key).put(value.getRestaurantId(), value);
 		Log.w("Lunchdroid",
 				String.valueOf(size()) + " items in RestaurantCollection.");
 
 	}
 	
 	public List<Restaurant> getRestaurantsByDay(Date day){
+		isDataReady();
+		
+		if(mItems.containsKey(day)){
+			HashMap<Integer, Restaurant> r = mItems.get(day);
+			ArrayList<Restaurant> valuesList = new ArrayList<Restaurant>(r.values());
+			
+			
+			return valuesList;//(Restaurant[]) mItems.get(day)..values().toArray();
+		}
+		return null;
+	}
+	
+	public Restaurant getRestaurantByDayAndId(Date day, int id){
+		isDataReady();
+		if(mItems.containsKey(day)){
+			HashMap<Integer,Restaurant> hm = mItems.get(day);
+			if(hm.containsKey(id)){
+				return hm.get(id);
+			}
+		}
+		return null;
+	}
+	
+	protected void isDataReady(){
 		synchronized(lock){
 		    while (!this.ready){
 		        try {
@@ -49,10 +74,6 @@ public final class RestaurantCollection {
 				}
 		    }
 		}
-		if(mItems.containsKey(day)){
-			return mItems.get(day);
-		}
-		return null;
 	}
 	
 	protected void finishedAddingData(){
@@ -68,5 +89,9 @@ public final class RestaurantCollection {
 			mInstance = new RestaurantCollection();
 		}
 		return mInstance;
+	}
+
+	protected synchronized int getNewId() {
+		return mRestaurantId++;
 	}
 }
