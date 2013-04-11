@@ -38,7 +38,7 @@ public class ContactActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 
-				PhoneCall.call("+436649217257", (Activity) context); 
+				PhoneCall.call("+436649217257 ", (Activity) context); 
 			}
  
 		});
