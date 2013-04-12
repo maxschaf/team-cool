@@ -16,7 +16,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+import java.util.Date;
+
+import android.util.Log;
 
 public class TabDistanceActivity extends ListActivity {
 	@Override
@@ -43,8 +45,10 @@ public class TabDistanceActivity extends ListActivity {
 		// get selected items
 		Restaurant selectedValue = (Restaurant)getListAdapter().getItem(position);
 
+		Log.w("Lunchdroid", "Distance: restaurantid:" + selectedValue.getRestaurantId());
+		
 		Intent intent = new Intent(this, ContactActivity.class);
-		//intent.setDa		
+		intent.putExtra("restaurantid", selectedValue.getRestaurantId());
 		//Toast.makeText(this, selectedValue.getRestaurantName(), Toast.LENGTH_SHORT).show();
 		startActivity(intent);
 

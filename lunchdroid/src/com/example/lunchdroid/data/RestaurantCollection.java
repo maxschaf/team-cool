@@ -53,10 +53,14 @@ public final class RestaurantCollection {
 	}
 	
 	public Restaurant getRestaurantByDayAndId(Date day, int id){
+		Log.w("Lunchdroid", "oioi1");
 		isDataReady();
+		Log.w("Lunchdroid", "oioi2");
 		if(mItems.containsKey(day)){
+			Log.w("Lunchdroid", "oioi3");
 			HashMap<Integer,Restaurant> hm = mItems.get(day);
 			if(hm.containsKey(id)){
+				Log.w("Lunchdroid", "oioi4");
 				return hm.get(id);
 			}
 		}
