@@ -93,7 +93,7 @@ public class GetTodayTuGrazAt {
 				parse(in);
 				// ItemCollection.getInstance().addItems(list);
 				in.close();
-				
+
 				// todo da momentan nur eine datenquelle reicht das so.
 				RestaurantCollection.getInstance().finishedAddingData();
 			} catch (IOException e) {
@@ -167,12 +167,22 @@ public class GetTodayTuGrazAt {
 									}
 								}
 							}
-							eventType = parser.next();
+							try { // Gingerbread throws Exception when
+									// ENd_Document is reached, 4.x doesnt.
+								eventType = parser.next();
+							} catch (IllegalStateException e) {
+								eventType = XmlPullParser.END_DOCUMENT;
+							}
 						}
 					}
 
 				}
-				eventType = parser.next();
+				try { // Gingerbread throws Exception when ENd_Document is
+						// reached, 4.x doesnt.
+					eventType = parser.next();
+				} catch (IllegalStateException e) {
+					eventType = XmlPullParser.END_DOCUMENT;
+				}
 			}
 		}
 
