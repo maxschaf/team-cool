@@ -52,7 +52,9 @@ public final class RestaurantCollection {
 		return new ArrayList<Restaurant>();
 	}
 	
+	//blocking!
 	public Restaurant getRestaurantById(int id) {
+		isDataReady();
 		return mIds.get(id);
 	}
 	
