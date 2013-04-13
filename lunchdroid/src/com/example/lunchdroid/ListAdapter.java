@@ -3,6 +3,7 @@ package com.example.lunchdroid;
 import java.util.List;
 
 import com.example.lunchdroid.data.Restaurant;
+import com.example.lunchdroid.geo.Locator;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -31,9 +32,10 @@ public class ListAdapter extends ArrayAdapter<Restaurant>{
  
 		View rowView = inflater.inflate(R.layout.activity_distancelist, parent, false);
 		TextView textViewLabel = (TextView) rowView.findViewById(R.id.label);
-		TextView textViewAddress = (TextView) rowView.findViewById(R.id.address);
+		TextView textViewDistance = (TextView) rowView.findViewById(R.id.distance);
 		textViewLabel.setText(values[position].getRestaurantName());
-		textViewAddress.setText(values[position].getRestaurantAddress());
+		
+		textViewDistance.setText(values[position].getRestaurantDistance() + "m");
  
 
  

@@ -7,12 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.util.Log;
+import android.util.SparseArray;
 
 //Speichert alle Items, Singleton!
 public final class RestaurantCollection {
 
 	private static RestaurantCollection mInstance;
-	private HashMap<Date, HashMap<Integer, Restaurant>> mItems;
+	private HashMap<Date, List<Restaurant>> mItems;
+	private SparseArray<Restaurant> mIds = new SparseArray<Restaurant>();
 	private int mRestaurantId = -1;
 	private final Object lock = new Object();
 	
@@ -20,7 +22,7 @@ public final class RestaurantCollection {
 	
 	
 	private RestaurantCollection() {
-		mItems = new HashMap<Date, HashMap<Integer, Restaurant>>();
+		mItems = new HashMap<Date, List<Restaurant>>();
 	}
 
 	// kritisch für nebenläufigkeit, sollte abstrakter gehalten werden
@@ -31,41 +33,40 @@ public final class RestaurantCollection {
 
 	public synchronized void addItem(Date key, Restaurant value) {
 		if (!mItems.containsKey(key)) {
-			mItems.put(key, new HashMap<Integer,Restaurant>());
+			mItems.put(key, new ArrayList<Restaurant>());
 		}
-		mItems.get(key).put(value.getRestaurantId(), value);
+		mItems.get(key).add(value);
+		mIds.append(value.getRestaurantId(), value);
 		Log.w("Lunchdroid",
 				String.valueOf(size()) + " items in RestaurantCollection.");
 
 	}
 	
+	//blocking!
 	public List<Restaurant> getRestaurantsByDay(Date day){
 		isDataReady();
 		
 		if(mItems.containsKey(day)){
-			HashMap<Integer, Restaurant> r = mItems.get(day);
-			ArrayList<Restaurant> valuesList = new ArrayList<Restaurant>(r.values());
-			
-			
-			return valuesList;//(Restaurant[]) mItems.get(day)..values().toArray();
+			return mItems.get(day);
 		}
 		return new ArrayList<Restaurant>();
 	}
 	
-	public Restaurant getRestaurantByDayAndId(Date day, int id){
-		Log.w("Lunchdroid", "oioi1");
-		isDataReady();
-		Log.w("Lunchdroid", "oioi2");
-		if(mItems.containsKey(day)){
-			Log.w("Lunchdroid", "oioi3");
-			HashMap<Integer,Restaurant> hm = mItems.get(day);
-			if(hm.containsKey(id)){
-				Log.w("Lunchdroid", "oioi4");
-				return hm.get(id);
-			}
-		}
-		return null;
+	public Restaurant getRestaurantById(int id) {
+		return mIds.get(id);
 	}
+	
+	//blocking!
+//	public Restaurant getRestaurantByDayAndId(Date day, int id){
+//		isDataReady();
+//		if(mItems.containsKey(day)){
+//			HashMap<Integer,Restaurant> hm = mItems.get(day);
+//			if(hm.containsKey(id)){
+//				return hm.get(id);
+//			}
+//		}
+//		return null;
+//	}
 	
 	protected void isDataReady(){
 		synchronized(lock){

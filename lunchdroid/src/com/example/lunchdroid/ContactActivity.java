@@ -33,7 +33,7 @@ public class ContactActivity extends Activity {
 		
 		Intent intent = getIntent();
 		int restaurant_id = intent.getIntExtra("restaurantid", 0);
-		restaurant = RestaurantCollection.getInstance().getRestaurantByDayAndId(LunchdroidHelper.getDateTodayZeroTime(), restaurant_id);
+		restaurant = RestaurantCollection.getInstance().getRestaurantById(restaurant_id);
 		String restaurant_name = restaurant.getRestaurantName();
 		
 		Log.w("Lunchdroid",
