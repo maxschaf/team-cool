@@ -70,6 +70,7 @@ public class ContactActivity extends Activity {
 	}
 	
 	public void setFields() {
+		
 		restaurant_text = (TextView) findViewById(R.id.contact_restaurant_text);
 		restaurant_text.setText(restaurant.getRestaurantName());	
 		
