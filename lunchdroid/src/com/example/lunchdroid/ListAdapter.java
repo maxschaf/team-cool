@@ -16,7 +16,8 @@ public class ListAdapter extends ArrayAdapter<Restaurant>{
 	public ListAdapter(Context context, Restaurant[] objects) {
 		super(context, R.layout.activity_distancelist, objects);
 		this.context = context;
-		this.values = objects;		
+		this.values = objects;	
+ 
 	}
 	
 	private final Context context;

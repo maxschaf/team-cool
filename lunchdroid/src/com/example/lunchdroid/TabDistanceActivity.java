@@ -12,8 +12,10 @@ import com.example.lunchdroid.data.RestaurantCollection;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.Date;
@@ -26,12 +28,15 @@ public class TabDistanceActivity extends ListActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
-		// TextView textview = new TextView(this);
-		// textview.setText("Distance Tab is Selected");
-		// setContentView(textview);
+		TextView textview = new TextView(this);
+		textview.setText("Keine Einträge vorhanden.");
+		textview.setVisibility(View.GONE);
+		((ViewGroup) getListView().getParent()).addView(textview);
+		getListView().setEmptyView(textview);
 
 		List<Restaurant> todaysRestaurants = RestaurantCollection.getInstance()
-				.getRestaurantsByDay(LunchdroidHelper.getDateTodayZeroTime());
+				.getRestaurantsByDay(
+						LunchdroidHelper.getDateDayOfWeek("sunday"));
 		Restaurant[] array = todaysRestaurants
 				.toArray(new Restaurant[todaysRestaurants.size()]);
 		setListAdapter(new ListAdapter(this, array));
@@ -43,13 +48,16 @@ public class TabDistanceActivity extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 
 		// get selected items
-		Restaurant selectedValue = (Restaurant)getListAdapter().getItem(position);
+		Restaurant selectedValue = (Restaurant) getListAdapter().getItem(
+				position);
 
-		Log.w("Lunchdroid", "Distance: restaurantid:" + selectedValue.getRestaurantId());
-		
+		Log.w("Lunchdroid",
+				"Distance: restaurantid:" + selectedValue.getRestaurantId());
+
 		Intent intent = new Intent(this, ContactActivity.class);
 		intent.putExtra("restaurantid", selectedValue.getRestaurantId());
-		//Toast.makeText(this, selectedValue.getRestaurantName(), Toast.LENGTH_SHORT).show();
+		// Toast.makeText(this, selectedValue.getRestaurantName(),
+		// Toast.LENGTH_SHORT).show();
 		startActivity(intent);
 
 	}

@@ -49,7 +49,7 @@ public final class RestaurantCollection {
 			
 			return valuesList;//(Restaurant[]) mItems.get(day)..values().toArray();
 		}
-		return null;
+		return new ArrayList<Restaurant>();
 	}
 	
 	public Restaurant getRestaurantByDayAndId(Date day, int id){

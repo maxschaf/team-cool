@@ -10,27 +10,57 @@ import android.util.Log;
 
 public class LunchdroidHelper {
 
-	public static synchronized Date getDateTodayZeroTime(){
+	public static synchronized Date getDateTodayZeroTime() {
 		Calendar cal = Calendar.getInstance();
+		return setCalZero(cal).getTime();
+	}
+	
+	public static Calendar setCalZero(Calendar cal){
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
-		cal.set(Calendar.MILLISECOND,0);
-		return cal.getTime();
+		cal.set(Calendar.MILLISECOND, 0);
+		return cal;
 	}
-	
-	public static String DateToKeyString(Date key){
+
+	public static synchronized Date getDateDayOfWeek(String dayname) {
+		Calendar cal = Calendar.getInstance();
+		int dayTarget;
+		
+		if (dayname.equalsIgnoreCase("monday")) {
+			dayTarget = Calendar.MONDAY;
+		} else if (dayname.equalsIgnoreCase("tuesday")) {
+			dayTarget = Calendar.TUESDAY;
+		} else if (dayname.equalsIgnoreCase("wednesday")) {
+			dayTarget = Calendar.WEDNESDAY;
+		} else if (dayname.equalsIgnoreCase("thursday")) {
+			dayTarget = Calendar.THURSDAY;
+		} else if (dayname.equalsIgnoreCase("friday")) {
+			dayTarget = Calendar.FRIDAY;
+		} else if (dayname.equalsIgnoreCase("saturday")) {
+			dayTarget = Calendar.SATURDAY;
+		} else if (dayname.equalsIgnoreCase("sunday")) {
+			dayTarget = Calendar.SUNDAY;
+		}
+		else return null;
+		
+        cal.set(Calendar.DAY_OF_WEEK, dayTarget);
+		
+		return setCalZero(cal).getTime();
+	}
+
+	public static String DateToKeyString(Date key) {
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 		return df.format(key);
 	}
-	
-	public static Date KeyStringToDate(String key){
+
+	public static Date KeyStringToDate(String key) {
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
-		
+
 		try {
-			 return df.parse(key);
+			return df.parse(key);
 		} catch (ParseException e) {
-			Log.e("Lunchdroid", "KeyStringToDate: "+ e.getMessage());
+			Log.e("Lunchdroid", "KeyStringToDate: " + e.getMessage());
 		}
 		return null;
 	}
