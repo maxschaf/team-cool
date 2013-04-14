@@ -8,7 +8,7 @@ import java.util.Date;
 
 import android.util.Log;
 
-public class LunchdroidHelper {
+public final class LunchdroidHelper {
 
 	public static synchronized Date getDateTodayZeroTime() {
 		Calendar cal = Calendar.getInstance();
@@ -23,8 +23,12 @@ public class LunchdroidHelper {
 		return cal;
 	}
 
+	// Montag ist erster Tag der Woche. D.h. Today und Montag bis Sonntag setzen bleibt in der
+	// gleichen Woche. Standard ist Sonntag - Samstag.
 	public static synchronized Date getDateDayOfWeek(String dayname) {
 		Calendar cal = Calendar.getInstance();
+		cal.setFirstDayOfWeek(Calendar.MONDAY);
+		cal.setTime(new Date());
 		int dayTarget;
 		
 		if (dayname.equalsIgnoreCase("monday")) {

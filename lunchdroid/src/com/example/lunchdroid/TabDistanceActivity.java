@@ -37,7 +37,7 @@ public class TabDistanceActivity extends ListActivity {
 
 		List<Restaurant> todaysRestaurants = RestaurantCollection.getInstance()
 				.getRestaurantsByDay(
-						LunchdroidHelper.getDateDayOfWeek("friday"));
+						LunchdroidHelper.getDateDayOfWeek("monday"));
 
 		calcDistances(todaysRestaurants);
 		
