@@ -18,6 +18,7 @@ public class LunchdroidActivity extends TabActivity {
 		super.onCreate(icicle);
 		setContentView(R.layout.activity_main);
 
+		Locator.getInstance(this).startLocationListener();
 		GetTodayTuGrazAt dl = new GetTodayTuGrazAt(this);
 		dl.startDownloadMenuByDayXml();
 		
@@ -45,9 +46,8 @@ public class LunchdroidActivity extends TabActivity {
     protected void onStart() {
         super.onStart();
 
-		Locator.getInstance(this).startLocationListener();
 		if(Locator.getInstance(this).getMyLocation() != null){
-			Log.w("Lunchdroid", "Distanz: " + String.valueOf(Locator.getInstance().getDistance("Austra�e 8 8480 Mureck")));
+			Log.w("Lunchdroid", "Distanz: " + String.valueOf(Locator.getInstance().getDistance("Austraße 8 8480 Mureck")));
 			
 		}
 

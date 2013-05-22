@@ -2,6 +2,14 @@ package com.example.lunchdroid.data;
 
 public class Lunch {
 	private final String mName;
+	public String getName() {
+		return mName;
+	}
+
+	public String getPrice() {
+		return mPrice;
+	}
+
 	private final String mPrice;
 
 	Lunch(String name, String price){

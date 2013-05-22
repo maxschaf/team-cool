@@ -36,7 +36,22 @@ public final class Locator {
 	private boolean mOrtungEnabled;
 	private Location mMyLocation;
 	private String mMyAddress;
+	
+	private final Object lock = new Object();
 
+	private void isDataReady(){
+		synchronized(lock){
+		    while (this.mMyLocation == null){
+		        try {
+					lock.wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    }
+		}
+	}
+	
 	public String getMyAddress() {
 		return mMyAddress;
 	}
@@ -46,11 +61,15 @@ public final class Locator {
 	}
 
 	public Location getMyLocation() {
+		isDataReady();
 		return mMyLocation;
 	}
 
 	protected synchronized void setMyLocation(Location mMyLocation) {
-		this.mMyLocation = mMyLocation;
+		synchronized(lock){
+		    this.mMyLocation = mMyLocation;
+		    lock.notifyAll();
+		}	
 	}
 
 	private Locator() {
@@ -72,7 +91,7 @@ public final class Locator {
 
 		String toastText;
 		if (!mGpsEnabled && mOrtungEnabled) {
-			toastText = "F�r genauere Ortsbestimmung GPS einschalten.";
+			toastText = "Für genauere Ortsbestimmung GPS einschalten.";
 			Toast.makeText(mContext, toastText, Toast.LENGTH_LONG).show();
 		} else if (!mGpsEnabled && !mOrtungEnabled) {
 			toastText = "Keine Ortsbestimmung eingeschalten.";
@@ -182,14 +201,14 @@ public final class Locator {
 		}
 	}
 	
-	public double getDistance(String addressStr){
+	public float getDistance(String addressStr){
 		Geocoder coder = new Geocoder(mContext);
 		List<Address> addressL;
 		Location location = new Location("");
 		try {
 		    addressL = coder.getFromLocationName(addressStr,5);
 		    if (addressL == null) {
-		        return -1.0;
+		        return -1.0f;
 		    }
 		    Address address = addressL.get(0);
 
@@ -201,15 +220,16 @@ public final class Locator {
 		     
 		}catch(Exception e){
 			e.getStackTrace();
-			return -1.0;
+			return -1.0f;
 		}
 		
 		
 		return getDistance(location);
 	}
 	
-	public double getDistance(Location location){
-		return location.distanceTo(mMyLocation);		
+	//blocking!
+	public float getDistance(Location location){
+		return location.distanceTo(getMyLocation());		
 	}
 
 	public void startLocationListener() {
