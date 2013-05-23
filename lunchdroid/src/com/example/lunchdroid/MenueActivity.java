@@ -1,17 +1,13 @@
 package com.example.lunchdroid;
 
-import android.annotation.SuppressLint;
 import android.app.ActionBar;
-import android.app.ActionBar.Tab;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 
-@SuppressLint("NewApi")
-public class MenueActivity extends FragmentActivity implements
-		ActionBar.TabListener {
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
+//@SuppressLint("NewApi")
+public class MenueActivity extends SherlockFragmentActivity {
 
 	private ViewPager mViewPager;
 	private TabsAdapter mTabsAdapter;
@@ -26,7 +22,7 @@ public class MenueActivity extends FragmentActivity implements
 
 		final ActionBar bar = getActionBar();
 		bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		bar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
+		// bar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
 
 		mTabsAdapter = new TabsAdapter(this, mViewPager);
 		mTabsAdapter.addTab(bar.newTab().setText("Mo"), Day_Fragment.class,
@@ -45,26 +41,23 @@ public class MenueActivity extends FragmentActivity implements
 				null);
 	}
 
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		System.out.println("tab selected: " + tab.getText().toString());
-	}
+	/*
+	 * TaBLISENER
+	 * 
+	 * @Override public void onTabReselected(Tab tab, FragmentTransaction ft) {
+	 * // TODO Auto-generated method stub System.out.println("tab selected: " +
+	 * tab.getText().toString()); }
+	 * 
+	 * @Override public void onTabSelected(Tab tab, FragmentTransaction ft) { //
+	 * TODO Auto-generated method stub Fragment fragment = new Day_Fragment();
+	 * Bundle args = new Bundle(); args.putInt(null, tab.getPosition());
+	 * fragment.setArguments(args); // getFragmentManager().beginTransaction()
+	 * // .replace(R.id.container, fragment).commit(); }
+	 * 
+	 * @Override public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+	 * // TODO Auto-generated method stub
+	 * 
+	 * }
+	 */
 
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-		Fragment fragment = new Day_Fragment();
-		Bundle args = new Bundle();
-		args.putInt(null, tab.getPosition() + 1);
-		fragment.setArguments(args);
-		// getFragmentManager().beginTransaction()
-		// .replace(R.id.container, fragment).commit();
-	}
-
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
-
-	}
 }

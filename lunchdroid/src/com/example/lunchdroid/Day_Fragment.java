@@ -2,7 +2,6 @@ package com.example.lunchdroid;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -37,7 +36,7 @@ public class Day_Fragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
-		Intent intent = getActivity().getIntent();
+		// Intent intent = getActivity().getIntent();
 
 	}
 
