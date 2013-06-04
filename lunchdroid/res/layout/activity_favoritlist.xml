@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp" >
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.21"
+        android:text="@+id/label"
+        android:textSize="20sp" >
+    </TextView>
+
+    <CheckBox
+        android:id="@+id/favoritstar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@android:drawable/btn_star"
+        android:visibility="visible" 
+        android:onClick="onCheckboxClicked"
+        />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@+id/distance"
+        android:textSize="12sp" />
+
+</LinearLayout>
