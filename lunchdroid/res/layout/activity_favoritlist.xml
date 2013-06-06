@@ -20,7 +20,9 @@
         android:layout_height="wrap_content"
         android:button="@android:drawable/btn_star"
         android:visibility="visible" 
-        android:onClick="onCheckboxClicked"
+        
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         />
 
     <TextView
