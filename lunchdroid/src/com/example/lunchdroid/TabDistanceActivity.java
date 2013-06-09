@@ -24,6 +24,8 @@ import com.example.lunchdroid.geo.Locator;
 
 
 public class TabDistanceActivity extends ListActivity {
+	private List<Restaurant> todaysRestaurants;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -35,25 +37,15 @@ public class TabDistanceActivity extends ListActivity {
 		((ViewGroup) getListView().getParent()).addView(textview);
 		getListView().setEmptyView(textview);
 
-		List<Restaurant> todaysRestaurants = RestaurantCollection.getInstance()
+		todaysRestaurants = RestaurantCollection.getInstance()
 				.getRestaurantsByDay(
-						LunchdroidHelper.getDateDayOfWeek("monday"));
+						LunchdroidHelper.getDateDayOfWeek(LunchdroidHelper.getNextWorkdayDayname()));
 
 		calcDistances(todaysRestaurants);
-		
-//		 Collections.sort(todaysRestaurants, new Comparator<Restaurant>() {
-//			@Override
-//			public int compare(final Restaurant object1,
-//					final Restaurant object2) {
-//				return object1.getRestaurantName().compareTo(
-//						object2.getRestaurantName());
-//			}
-//		});
 
-		Restaurant[] array = todaysRestaurants
-				.toArray(new Restaurant[todaysRestaurants.size()]);
-		setListAdapter(new ListAdapter(this, array));
-
+//		Restaurant[] todayRestaurantsArray = todaysRestaurants
+//				.toArray(new Restaurant[todaysRestaurants.size()]);
+//		setListAdapter(new ListAdapterFavorit(this, todayRestaurantsArray));
 	}
 
 	@Override
@@ -92,5 +84,15 @@ public class TabDistanceActivity extends ListActivity {
 		});
 		
 		return todaysRestaurants;
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+		Restaurant[] todayRestaurantsArray = todaysRestaurants
+				.toArray(new Restaurant[todaysRestaurants.size()]);
+		setListAdapter(new ListAdapterFavorit(this, todayRestaurantsArray));
 	}
 }

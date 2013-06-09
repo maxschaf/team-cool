@@ -46,4 +46,12 @@ public class Restaurant {
 	public ArrayList<Lunch> getRestaurantLunch() {
 		return restaurantLunch;
 	}
+
+	public void setIsFavorit(boolean checked) {
+		PersistentPreferencesCollection.getInstance().getPersistentPreference("FAV").setState(restaurantName, checked);
+	}
+	
+	public boolean getIsFavorit() {
+		return PersistentPreferencesCollection.getInstance().getPersistentPreference("FAV").getState(restaurantName);
+	}
 }
