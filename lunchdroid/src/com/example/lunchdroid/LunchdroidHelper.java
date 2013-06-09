@@ -1,11 +1,13 @@
 package com.example.lunchdroid;
 
 import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 public final class LunchdroidHelper {
@@ -14,8 +16,8 @@ public final class LunchdroidHelper {
 		Calendar cal = Calendar.getInstance();
 		return setCalZero(cal).getTime();
 	}
-	
-	public static Calendar setCalZero(Calendar cal){
+
+	public static Calendar setCalZero(Calendar cal) {
 		cal.set(Calendar.HOUR_OF_DAY, 0);
 		cal.set(Calendar.MINUTE, 0);
 		cal.set(Calendar.SECOND, 0);
@@ -23,14 +25,15 @@ public final class LunchdroidHelper {
 		return cal;
 	}
 
-	// Montag ist erster Tag der Woche. D.h. Today und Montag bis Sonntag setzen bleibt in der
+	// Montag ist erster Tag der Woche. D.h. Today und Montag bis Sonntag setzen
+	// bleibt in der
 	// gleichen Woche. Standard ist Sonntag - Samstag.
 	public static synchronized Date getDateDayOfWeek(String dayname) {
 		Calendar cal = Calendar.getInstance();
 		cal.setFirstDayOfWeek(Calendar.MONDAY);
 		cal.setTime(new Date());
 		int dayTarget;
-		
+
 		if (dayname.equalsIgnoreCase("monday")) {
 			dayTarget = Calendar.MONDAY;
 		} else if (dayname.equalsIgnoreCase("tuesday")) {
@@ -45,11 +48,11 @@ public final class LunchdroidHelper {
 			dayTarget = Calendar.SATURDAY;
 		} else if (dayname.equalsIgnoreCase("sunday")) {
 			dayTarget = Calendar.SUNDAY;
-		}
-		else return null;
-		
-        cal.set(Calendar.DAY_OF_WEEK, dayTarget);
-		
+		} else
+			return null;
+
+		cal.set(Calendar.DAY_OF_WEEK, dayTarget);
+
 		return setCalZero(cal).getTime();
 	}
 
@@ -67,5 +70,31 @@ public final class LunchdroidHelper {
 			Log.e("Lunchdroid", "KeyStringToDate: " + e.getMessage());
 		}
 		return null;
+	}
+
+	public static String getTodayDayname() {
+		String dayNames[] = new DateFormatSymbols(Locale.ENGLISH).getWeekdays();
+		Calendar date2 = Calendar.getInstance();
+		return dayNames[date2.get(Calendar.DAY_OF_WEEK)];
+	}
+	
+	public static String getNextWorkdayDayname(){
+		String name = getTodayDayname();
+		if(name.equalsIgnoreCase("saturday") || name.equalsIgnoreCase("sunday")){
+			return "monday";
+		}
+		return name;
+	}
+	
+	@SuppressLint("DefaultLocale")
+	public static String getDistanceText(int meters){		
+		if(meters >= 1000 && meters < 100000){
+			double km = (double)meters / 1000;
+			return String.format("%d.2km", Math.round(km));
+		}else if(meters >= 100000){
+			return "";
+		}else{
+			return String.format("  %dm", meters);
+		}
 	}
 }

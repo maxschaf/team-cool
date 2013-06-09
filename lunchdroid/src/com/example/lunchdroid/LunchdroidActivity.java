@@ -4,6 +4,7 @@ package com.example.lunchdroid;
 
 
 import com.example.lunchdroid.data.GetTodayTuGrazAt;
+import com.example.lunchdroid.data.PersistentPreferencesCollection;
 import com.example.lunchdroid.geo.Locator;
 
 import android.app.TabActivity;
@@ -19,8 +20,10 @@ public class LunchdroidActivity extends TabActivity {
 		setContentView(R.layout.activity_main);
 
 		Locator.getInstance(this).startLocationListener();
+		PersistentPreferencesCollection.getInstance().addPersistentPreference(this, "FAV");
 		GetTodayTuGrazAt dl = new GetTodayTuGrazAt(this);
 		dl.startDownloadMenuByDayXml();
+		
 		
 		TabHost tabs = getTabHost(); 
 
