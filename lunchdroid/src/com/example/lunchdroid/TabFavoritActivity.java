@@ -1,7 +1,9 @@
 package com.example.lunchdroid;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import com.example.lunchdroid.data.Restaurant;
@@ -20,6 +22,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class TabFavoritActivity extends ListActivity {
+	private List<Restaurant> todaysRestaurants;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
@@ -30,16 +34,29 @@ public class TabFavoritActivity extends ListActivity {
 		((ViewGroup) getListView().getParent()).addView(textview);
 		getListView().setEmptyView(textview);
 
-		List<Restaurant> todaysRestaurants = RestaurantCollection.getInstance()
+		todaysRestaurants = RestaurantCollection.getInstance()
 				.getRestaurantsByDay(
-						LunchdroidHelper.getDateDayOfWeek("monday"));
+						LunchdroidHelper.getDateDayOfWeek(LunchdroidHelper
+								.getNextWorkdayDayname()));
 
 		calcDistances(todaysRestaurants);
 
-		Restaurant[] array = todaysRestaurants
-				.toArray(new Restaurant[todaysRestaurants.size()]);
-		setListAdapter(new ListAdapterFavorit(this, array));
+//		List<Restaurant> temp = new ArrayList<Restaurant>(todaysRestaurants);
+//		removeNonFavorit(temp);
+//
+//		Restaurant[] array = temp
+//				.toArray(new Restaurant[temp.size()]);
+//		setListAdapter(new ListAdapterFavorit(this, array));
+	}
 
+	private void removeNonFavorit(List<Restaurant> todaysRestaurants) {
+		Iterator<Restaurant> i = todaysRestaurants.iterator();
+		while (i.hasNext()) {
+			Restaurant r = i.next(); 
+			if (!r.getIsFavorit()) {
+				i.remove();
+			}
+		}
 	}
 
 	@Override
@@ -59,21 +76,6 @@ public class TabFavoritActivity extends ListActivity {
 		// Toast.LENGTH_SHORT).show();
 		startActivity(intent);
 
-	}
-
-	public void onCheckboxClicked(View view) {
-		// Is the view now checked?
-		boolean checked = ((CheckBox) view).isChecked();
-
-		
-		// Check which checkbox was clicked
-		switch (view.getId()) {
-		case R.id.favoritstar:
-			if (checked) {
-			} else { 
-			}
-			break;
-		}
 	}
 
 	// todo blockiert, bis location gefunden wurde... koennte ewig haengen
@@ -98,5 +100,18 @@ public class TabFavoritActivity extends ListActivity {
 		});
 
 		return todaysRestaurants;
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+
+		List<Restaurant> temp = new ArrayList<Restaurant>(todaysRestaurants);
+		removeNonFavorit(temp);
+
+		Restaurant[] array = temp
+				.toArray(new Restaurant[temp.size()]);
+		setListAdapter(new ListAdapterFavorit(this, array));
 	}
 }
