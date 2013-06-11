@@ -4,12 +4,16 @@ import com.example.lunchdroid.data.Restaurant;
 import com.example.lunchdroid.data.RestaurantCollection;
 
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.content.Intent;
@@ -26,6 +30,7 @@ public class ContactActivity extends Activity {
 	TextView adress_text;
 	Restaurant restaurant;
 	
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,7 +44,8 @@ public class ContactActivity extends Activity {
 		Log.w("Lunchdroid",
 				"Contact: restaurent_id: " + restaurant_id + "restaurant_name: " + restaurant_name);
 		
-		
+	    getActionBar().setDisplayHomeAsUpEnabled(true);
+
 		setFields();
 		addListenerOnPhoneButton();
 	}
@@ -77,6 +83,19 @@ public class ContactActivity extends Activity {
 		adress_text = (TextView) findViewById(R.id.contact_adress_text);
 		adress_text.setText("Adresse: " + restaurant.getRestaurantAddress());
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        //NavUtils.navigateUpFromSameTask(this);
+	        onBackPressed();
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
+	}
+	
 	
 }
 

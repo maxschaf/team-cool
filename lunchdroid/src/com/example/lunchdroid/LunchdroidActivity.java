@@ -10,9 +10,22 @@ import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.TabHost;
 
 public class LunchdroidActivity extends TabActivity {
+
+	    
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.activity_main, menu);
+	    return true;
+	}
+	
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
@@ -21,6 +34,8 @@ public class LunchdroidActivity extends TabActivity {
 		Locator.getInstance(this).startLocationListener();
 		GetTodayTuGrazAt dl = new GetTodayTuGrazAt(this);
 		dl.startDownloadMenuByDayXml();
+		
+			
 		
 		TabHost tabs = getTabHost(); 
 
