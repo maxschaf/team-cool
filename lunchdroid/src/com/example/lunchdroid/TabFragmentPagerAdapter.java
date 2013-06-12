@@ -21,17 +21,18 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
 		switch (arg0) {
 		/** Android tab is selected */
 		case 0:
-			TabDistanceFragment androidFragment = new TabDistanceFragment();
+			TabDistanceFragment distanceFragment = new TabDistanceFragment();
 			data.putInt("current_page", arg0 + 1);
-			androidFragment.setArguments(data);
-			return androidFragment;
+			distanceFragment.setArguments(data);
+			
+			return distanceFragment;
 
 			/** Apple tab is selected */
 		case 1:
-			TabFavoritFragment appleFragment = new TabFavoritFragment();
+			TabFavoritFragment favoritFragment = new TabFavoritFragment();
 			data.putInt("current_page", arg0 + 1);
-			appleFragment.setArguments(data);
-			return appleFragment;
+			favoritFragment.setArguments(data);
+			return favoritFragment;
 		}
 		return null;
 	}
