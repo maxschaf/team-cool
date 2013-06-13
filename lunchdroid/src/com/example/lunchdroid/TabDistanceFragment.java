@@ -58,8 +58,12 @@ public class TabDistanceFragment extends SherlockListFragment  {
 		Log.w("Lunchdroid",
 				"Distance: restaurantid:" + selectedValue.getRestaurantId());
 
+//		Intent intent = new Intent(getActivity()
+//				.getBaseContext(), ContactActivity.class);
+		
 		Intent intent = new Intent(getActivity()
-				.getBaseContext(), ContactActivity.class);
+				.getBaseContext(), RestaurantDetailActivity.class);
+		
 		intent.putExtra("restaurantid", selectedValue.getRestaurantId());
 		// Toast.makeText(this, selectedValue.getRestaurantName(),
 		// Toast.LENGTH_SHORT).show();

@@ -97,4 +97,20 @@ public final class LunchdroidHelper {
 			return String.format("  %dm", meters);
 		}
 	}
+	
+	public static int getNextWorkDayNumber(){
+		String name = getNextWorkdayDayname();
+		if(name.equalsIgnoreCase("monday")){
+			return 0;
+		} else if(name.equalsIgnoreCase("tuesday")){
+			return 1;
+		} else if(name.equalsIgnoreCase("wednesday")){
+			return 2;
+		} else if(name.equalsIgnoreCase("thursday")){
+			return 3;
+		} else if(name.equalsIgnoreCase("friday")){
+			return 4;
+		} 
+		return 0;
+	}
 }

@@ -7,8 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
 
-	final int PAGE_COUNT = 2;
-
 	/** Constructor of the class */
 	public TabFragmentPagerAdapter(FragmentManager fm) {
 		super(fm);
@@ -40,6 +38,6 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
 	/** Returns the number of pages */
 	@Override
 	public int getCount() {
-		return PAGE_COUNT;
+		return 2;
 	}
 }

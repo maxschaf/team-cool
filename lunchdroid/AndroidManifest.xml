@@ -63,6 +63,11 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDCcRvcTdHtw1dFWXoA6GnjS_1_O9oLhb0" />
+
+        <activity
+            android:name="com.example.lunchdroid.RestaurantDetailActivity"
+            android:label="@string/title_activity_restaurant_detail" >
+        </activity>
     </application>
 
 </manifest>
