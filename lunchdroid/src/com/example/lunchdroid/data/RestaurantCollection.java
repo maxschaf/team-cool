@@ -26,7 +26,6 @@ public final class RestaurantCollection {
 	}
 
 	// kritisch für nebenläufigkeit, sollte abstrakter gehalten werden
-
 	public int size() {
 		return mItems.size();
 	}
@@ -58,17 +57,16 @@ public final class RestaurantCollection {
 		return mIds.get(id);
 	}
 	
-	//blocking!
-//	public Restaurant getRestaurantByDayAndId(Date day, int id){
-//		isDataReady();
-//		if(mItems.containsKey(day)){
-//			HashMap<Integer,Restaurant> hm = mItems.get(day);
-//			if(hm.containsKey(id)){
-//				return hm.get(id);
-//			}
-//		}
-//		return null;
-//	}
+	//blocking
+	public Restaurant getRestaurantByDayAndName(Date day, String name){
+		List<Restaurant> todaysRestaurants = getRestaurantsByDay(day);
+		for(Restaurant r : todaysRestaurants){
+			if(r.getRestaurantName().equals(name)){
+				return r;
+			}
+		}
+		return null;		
+	}
 	
 	protected void isDataReady(){
 		synchronized(lock){

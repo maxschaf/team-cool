@@ -78,7 +78,7 @@ public class RestaurantDetailActivity extends SherlockFragmentActivity {
 			// below) with the page number as its lone argument.
 			Fragment fragment = new RestaurantDetailFragment();
 			Bundle args = new Bundle();
-			args.putInt(RestaurantDetailFragment.ARG_SECTION_NUMBER, position + 1);
+			args.putInt(RestaurantDetailFragment.ARG_SECTION_NUMBER, position);
 			fragment.setArguments(args);
 			return fragment;
 		}

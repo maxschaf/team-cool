@@ -60,8 +60,8 @@ public class TabListAdapterFavorit extends ArrayAdapter<Restaurant> {
 		}
 
 		Restaurant restaurant = values[position];
-		holder.label.setText(values[position].getRestaurantName());
-		holder.distance.setText(LunchdroidHelper.getDistanceText(values[position].getRestaurantDistance()));
+		holder.label.setText(restaurant.getRestaurantName());
+		holder.distance.setText(LunchdroidHelper.getDistanceText(restaurant.getRestaurantDistance()));
 		holder.favorit.setChecked(restaurant.getIsFavorit());
 		holder.favorit.setTag(restaurant);
 
