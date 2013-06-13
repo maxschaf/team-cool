@@ -78,7 +78,7 @@ public class TabDistanceFragment extends SherlockListFragment  {
 		
 		Restaurant[] todayRestaurantsArray = todaysRestaurants
 				.toArray(new Restaurant[todaysRestaurants.size()]);
-		setListAdapter(new ListAdapterFavorit(getActivity()
+		setListAdapter(new TabListAdapterFavorit(getActivity()
 				.getBaseContext(), todayRestaurantsArray));
 	}
 	

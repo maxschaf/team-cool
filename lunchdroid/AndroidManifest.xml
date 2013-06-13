@@ -40,21 +40,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.lunchdroid.TabDistanceFragment" >
-        </activity>
-        <activity android:name="com.example.lunchdroid.TabFavoritFragment" >
-        </activity>
-        <activity android:name="com.example.lunchdroid.TabDistanceActivity" >
-        </activity>
-        <activity android:name="com.example.lunchdroid.TabFavoritActivity" >
-        </activity>
         <activity
             android:name="com.example.lunchdroid.ContactActivity"
-            android:label="@string/title_activity_contact" >
+            android:label="@string/title_activity_contact" 
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.lunchdroid.PhoneCall"
-            android:label="@string/title_activity_phone_call" >
+            android:label="@string/title_activity_phone_call" 
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.lunchdroid.ContactActivity" />
@@ -66,7 +60,8 @@
 
         <activity
             android:name="com.example.lunchdroid.RestaurantDetailActivity"
-            android:label="@string/title_activity_restaurant_detail" >
+            android:label="@string/title_activity_restaurant_detail" 
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

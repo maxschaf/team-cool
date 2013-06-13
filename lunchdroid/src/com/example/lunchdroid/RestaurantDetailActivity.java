@@ -2,12 +2,14 @@ package com.example.lunchdroid;
 
 import java.util.Locale;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
+import com.example.lunchdroid.data.Restaurant;
+import com.example.lunchdroid.data.RestaurantCollection;
 
 public class RestaurantDetailActivity extends SherlockFragmentActivity {
 
@@ -24,6 +28,7 @@ public class RestaurantDetailActivity extends SherlockFragmentActivity {
 
 	ViewPager mViewPager;
 	ActionBar mActionBar;
+	Restaurant mRestaurant;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,15 @@ public class RestaurantDetailActivity extends SherlockFragmentActivity {
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		mViewPager.setCurrentItem(LunchdroidHelper.getNextWorkDayNumber());
+		
+		
+		Intent intent = getIntent();
+		int restaurant_id = intent.getIntExtra("restaurantid", 0);
+		mRestaurant = RestaurantCollection.getInstance().getRestaurantById(restaurant_id);
+		String restaurant_name = mRestaurant.getRestaurantName();
+		
+		Log.w("Lunchdroid",
+				"restaurant_name: " + restaurant_name);
 	}
 
 	@Override
@@ -51,10 +65,6 @@ public class RestaurantDetailActivity extends SherlockFragmentActivity {
 		return true;
 	}
 
-	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
-	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 		public SectionsPagerAdapter(FragmentManager fm) {
@@ -66,9 +76,9 @@ public class RestaurantDetailActivity extends SherlockFragmentActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
-			Fragment fragment = new DummySectionFragment();
+			Fragment fragment = new RestaurantDetailFragment();
 			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+			args.putInt(RestaurantDetailFragment.ARG_SECTION_NUMBER, position + 1);
 			fragment.setArguments(args);
 			return fragment;
 		}
@@ -97,32 +107,6 @@ public class RestaurantDetailActivity extends SherlockFragmentActivity {
 		}
 	}
 
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
-	public static class DummySectionFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
 
-		public DummySectionFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater
-					.inflate(R.layout.fragment_restaurant_detail_dummy,
-							container, false);
-			TextView dummyTextView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
-			return rootView;
-		}
-	}
 
 }
