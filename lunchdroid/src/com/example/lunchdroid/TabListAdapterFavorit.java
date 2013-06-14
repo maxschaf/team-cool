@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class ListAdapterFavorit extends ArrayAdapter<Restaurant> {
+public class TabListAdapterFavorit extends ArrayAdapter<Restaurant> {
 
-	public ListAdapterFavorit(Context context, Restaurant[] objects) {
-		super(context, R.layout.activity_favoritlist, objects);
+	public TabListAdapterFavorit(Context context, Restaurant[] objects) {
+		super(context, R.layout.fragment_tab_favoritlist, objects);
 		this.context = context;
 		this.values = objects;
 	}
@@ -34,7 +33,7 @@ public class ListAdapterFavorit extends ArrayAdapter<Restaurant> {
 		if (convertView == null) {
 			LayoutInflater vi = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			convertView = vi.inflate(R.layout.activity_favoritlist, null);
+			convertView = vi.inflate(R.layout.fragment_tab_favoritlist, null);
 
 			holder = new ViewHolder();
 			holder.label = (TextView) convertView.findViewById(R.id.label);
@@ -60,8 +59,8 @@ public class ListAdapterFavorit extends ArrayAdapter<Restaurant> {
 		}
 
 		Restaurant restaurant = values[position];
-		holder.label.setText(values[position].getRestaurantName());
-		holder.distance.setText(LunchdroidHelper.getDistanceText(values[position].getRestaurantDistance()));
+		holder.label.setText(restaurant.getRestaurantName());
+		holder.distance.setText(LunchdroidHelper.getDistanceText(restaurant.getRestaurantDistance()));
 		holder.favorit.setChecked(restaurant.getIsFavorit());
 		holder.favorit.setTag(restaurant);
 

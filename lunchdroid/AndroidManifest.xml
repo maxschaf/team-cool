@@ -36,25 +36,21 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.lunchdroid.TabDistanceFragment" >
-        </activity>
-        <activity android:name="com.example.lunchdroid.TabFavoritFragment" >
-        </activity>
-        <activity android:name="com.example.lunchdroid.TabDistanceActivity" >
-        </activity>
-        <activity android:name="com.example.lunchdroid.TabFavoritActivity" >
-        </activity>
         <activity
             android:name="com.example.lunchdroid.ContactActivity"
-            android:label="@string/title_activity_contact" >
+            android:label="@string/title_activity_contact"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.lunchdroid.RestaurantDetailActivity" />
         </activity>
         <activity
             android:name="com.example.lunchdroid.PhoneCall"
-            android:label="@string/title_activity_phone_call" >
+            android:label="@string/title_activity_phone_call"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.lunchdroid.ContactActivity" />
@@ -63,6 +59,15 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDCcRvcTdHtw1dFWXoA6GnjS_1_O9oLhb0" />
+
+        <activity
+            android:name="com.example.lunchdroid.RestaurantDetailActivity"
+            android:label="@string/title_activity_restaurant_detail"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.lunchdroid.LunchdroidActivity" />
+        </activity>
     </application>
 
 </manifest>

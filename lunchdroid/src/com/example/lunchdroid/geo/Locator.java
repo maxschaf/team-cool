@@ -290,6 +290,7 @@ public final class Locator {
 		Log.i("Lunchdroid", "LocationListener stopped.");
 	}
 
+	@SuppressWarnings("deprecation")
 	private void LocalisationNotification() {
 
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
