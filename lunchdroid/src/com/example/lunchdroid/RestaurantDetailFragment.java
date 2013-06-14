@@ -10,12 +10,13 @@ import com.example.lunchdroid.data.Restaurant;
 import com.example.lunchdroid.data.RestaurantCollection;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.AbsListView;
 
 /**
  * A dummy fragment representing a section of the app, but that simply displays
@@ -39,16 +40,20 @@ public class RestaurantDetailFragment extends SherlockListFragment {
 		Locale l = Locale.getDefault();
 
 		View rootView = inflater.inflate(
-				R.layout.fragment_restaurant_detail_dummy, container, false);
+				R.layout.fragment_restaurant_detail, container, false);
 		TextView tvRestaurantName = (TextView) rootView
 				.findViewById(R.id.restaurant_name);
+		TextView tvRestaurant = (TextView) rootView
+				.findViewById(R.id.restaurant);
 
 		String restaurantname = ((RestaurantDetailActivity) getActivity()).mRestaurant
 				.getRestaurantName();
 		tvRestaurantName.setText(restaurantname.toUpperCase(l));
 
-		
-		
+		ClickListenerRestaurantButton rcl = new ClickListenerRestaurantButton();
+		tvRestaurantName.setOnClickListener(rcl);
+		tvRestaurant.setOnClickListener(rcl);
+
 		int daykey = getArguments().getInt(ARG_SECTION_NUMBER);
 		Restaurant restaurant = RestaurantCollection.getInstance()
 				.getRestaurantByDayAndName(
@@ -71,5 +76,20 @@ public class RestaurantDetailFragment extends SherlockListFragment {
 		Lunch[] array = mLunches.toArray(new Lunch[mLunches.size()]);
 		setListAdapter(new RestaurantDetailLunchListAdapter(getActivity()
 				.getBaseContext(), array));
+	}
+
+	public class ClickListenerRestaurantButton implements OnClickListener {
+
+		@Override
+		public void onClick(View arg0) {
+			Intent intent = new Intent(getActivity().getBaseContext(),
+					ContactActivity.class);
+
+			intent.putExtra("restaurantid",
+					((RestaurantDetailActivity) getActivity()).mRestaurant
+							.getRestaurantId());
+			startActivity(intent);
+		}
+
 	}
 }

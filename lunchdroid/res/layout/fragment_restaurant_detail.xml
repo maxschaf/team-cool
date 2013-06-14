@@ -12,14 +12,14 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/textView1"
+        android:layout_above="@+id/restaurant"
         android:layout_marginBottom="10dp"
         android:choiceMode="singleChoice" >
 
     </ListView>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/restaurant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/restaurant_name"
@@ -32,10 +32,10 @@
         android:id="@+id/restaurant_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignLeft="@+id/restaurant"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="16dp"
-        android:text="Restaurant Name" 
+        android:text="Restaurant Name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

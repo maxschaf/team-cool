@@ -1,9 +1,7 @@
 package com.example.lunchdroid;
 
-import java.util.List;
-
 import com.example.lunchdroid.data.Restaurant;
-import com.example.lunchdroid.geo.Locator;
+
 
 import android.content.Context;
 import android.view.LayoutInflater;

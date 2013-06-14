@@ -7,18 +7,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.example.lunchdroid.data.Restaurant;
 import com.example.lunchdroid.data.RestaurantCollection;
 
@@ -35,27 +31,26 @@ public class RestaurantDetailActivity extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_restaurant_detail);
 		// /** Getting a reference to action bar of this activity */
-		// mActionBar = getSupportActionBar();
+		mActionBar = getSupportActionBar();
+		mActionBar.setDisplayHomeAsUpEnabled(true);
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
-		
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		mViewPager.setCurrentItem(LunchdroidHelper.getNextWorkDayNumber());
-		
-		
+
 		Intent intent = getIntent();
 		int restaurant_id = intent.getIntExtra("restaurantid", 0);
-		mRestaurant = RestaurantCollection.getInstance().getRestaurantById(restaurant_id);
+		mRestaurant = RestaurantCollection.getInstance().getRestaurantById(
+				restaurant_id);
 		String restaurant_name = mRestaurant.getRestaurantName();
-		
-		Log.w("Lunchdroid",
-				"restaurant_name: " + restaurant_name);
+
+		Log.w("Lunchdroid", "restaurant_name: " + restaurant_name);
 	}
 
 	@Override
@@ -63,6 +58,20 @@ public class RestaurantDetailActivity extends SherlockFragmentActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getSupportMenuInflater().inflate(R.menu.restaurant_detail, menu);
 		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	    	finish();	        
+	        //NavUtils.navigateUpFromSameTask(this);
+	    	//this.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK)); 
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+	    }
 	}
 
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -106,7 +115,5 @@ public class RestaurantDetailActivity extends SherlockFragmentActivity {
 			return null;
 		}
 	}
-
-
 
 }
