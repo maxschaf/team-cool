@@ -23,7 +23,7 @@ import com.example.lunchdroid.geo.Locator;
 
 public class TabFavoritFragment extends SherlockListFragment {
 	private List<Restaurant> todaysRestaurants;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -42,15 +42,14 @@ public class TabFavoritFragment extends SherlockListFragment {
 	public void onStart() {
 		super.onStart();
 		/** Setting the multiselect choice mode for the listview */
-		//getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		// getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 	}
-	
-	
+
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		// TODO Auto-generated method stub
 		super.onListItemClick(l, v, position, id);
-		
+
 		// get selected items
 		Restaurant selectedValue = (Restaurant) getListAdapter().getItem(
 				position);
@@ -58,8 +57,12 @@ public class TabFavoritFragment extends SherlockListFragment {
 		Log.w("Lunchdroid",
 				"Distance: restaurantid:" + selectedValue.getRestaurantId());
 
-		Intent intent = new Intent(getActivity()
-				.getBaseContext(), ContactActivity.class);
+		// Intent intent = new Intent(getActivity()
+		// .getBaseContext(), ContactActivity.class);
+
+		Intent intent = new Intent(getActivity().getBaseContext(),
+				RestaurantDetailActivity.class);
+		
 		intent.putExtra("restaurantid", selectedValue.getRestaurantId());
 		// Toast.makeText(this, selectedValue.getRestaurantName(),
 		// Toast.LENGTH_SHORT).show();
@@ -70,20 +73,15 @@ public class TabFavoritFragment extends SherlockListFragment {
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
+
 		List<Restaurant> temp = new ArrayList<Restaurant>(todaysRestaurants);
 		removeNonFavorit(temp);
 
-		Restaurant[] array = temp
-				.toArray(new Restaurant[temp.size()]);
-		setListAdapter(new ListAdapterFavorit(getActivity()
-				.getBaseContext(), array));
+		Restaurant[] array = temp.toArray(new Restaurant[temp.size()]);
+		setListAdapter(new TabListAdapterFavorit(
+				getActivity().getBaseContext(), array));
 	}
-	
-	
-	
-	
-	
+
 	// todo blockiert, bis location gefunden wurde... koennte ewig haengen
 	// bleiben
 	private List<Restaurant> calcDistances(List<Restaurant> todaysRestaurants) {
@@ -111,11 +109,11 @@ public class TabFavoritFragment extends SherlockListFragment {
 	private void removeNonFavorit(List<Restaurant> todaysRestaurants) {
 		Iterator<Restaurant> i = todaysRestaurants.iterator();
 		while (i.hasNext()) {
-			Restaurant r = i.next(); 
+			Restaurant r = i.next();
 			if (!r.getIsFavorit()) {
 				i.remove();
 			}
 		}
 	}
- 
+
 }

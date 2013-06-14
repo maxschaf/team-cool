@@ -1,7 +1,6 @@
 package com.example.lunchdroid.data;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Restaurant {
     private final String restaurantName;

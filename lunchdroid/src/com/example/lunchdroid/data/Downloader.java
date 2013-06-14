@@ -8,18 +8,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
-import com.example.lunchdroid.R;
-
 import android.os.AsyncTask;
-import android.widget.TextView;
 import android.app.*;
 import android.util.Log;
 
 public class Downloader {
-	private final Activity mParent;
+//	private final Activity mParent;
 
 	public Downloader(Activity parent) {
-		mParent = parent;
+//		mParent = parent;
 	}
 
 	public String startDownloadString(String Url) {

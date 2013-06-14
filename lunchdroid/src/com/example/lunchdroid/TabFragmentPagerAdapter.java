@@ -7,9 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
 
-	final int PAGE_COUNT = 2;
-
-	/** Constructor of the class */
 	public TabFragmentPagerAdapter(FragmentManager fm) {
 		super(fm);
 	}
@@ -19,15 +16,12 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
 	public Fragment getItem(int arg0) {
 		Bundle data = new Bundle();
 		switch (arg0) {
-		/** Android tab is selected */
 		case 0:
 			TabDistanceFragment distanceFragment = new TabDistanceFragment();
 			data.putInt("current_page", arg0 + 1);
-			distanceFragment.setArguments(data);
-			
+			distanceFragment.setArguments(data);			
 			return distanceFragment;
 
-			/** Apple tab is selected */
 		case 1:
 			TabFavoritFragment favoritFragment = new TabFavoritFragment();
 			data.putInt("current_page", arg0 + 1);
@@ -40,6 +34,6 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
 	/** Returns the number of pages */
 	@Override
 	public int getCount() {
-		return PAGE_COUNT;
+		return 2;
 	}
 }

@@ -95,7 +95,7 @@ public class LunchdroidActivity extends SherlockFragmentActivity {
  
 
         Tab tab = mActionBar.newTab()
-                .setText("Distance")
+                .setText("Distanz")
                 .setTabListener(tabListener);
  
         mActionBar.addTab(tab);

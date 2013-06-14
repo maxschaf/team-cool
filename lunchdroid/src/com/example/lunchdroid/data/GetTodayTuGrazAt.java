@@ -22,7 +22,7 @@ import android.util.Log;
 import android.util.Xml;
 
 public class GetTodayTuGrazAt {
-	private final Activity mParent;
+//	private final Activity mParent;
 	private final String mUrlMenuXml = "http://rss.tugraz.at/menue.xml";
 	private final String mUrlMenuByDayXml = "http://today.tugraz.at/menuesByDate.xml";
 	private final Integer mDays = 1;
@@ -30,7 +30,7 @@ public class GetTodayTuGrazAt {
 	private AsyncTask<String, Integer, Boolean> mDownloaderMenuByDayXml;
 
 	public GetTodayTuGrazAt(Activity parent) {
-		mParent = parent;
+//		mParent = parent;
 	}
 
 	public boolean hasFinishedMenuXml() {
@@ -190,7 +190,6 @@ public class GetTodayTuGrazAt {
 				throws XmlPullParserException, IOException {
 			// parser.require(XmlPullParser.START_TAG, "", "item");
 			String rname = "";
-			String time = "";
 			String address = "";
 			String phone = "";
 

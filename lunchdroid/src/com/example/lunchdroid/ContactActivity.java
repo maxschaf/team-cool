@@ -1,25 +1,26 @@
 package com.example.lunchdroid;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.example.lunchdroid.data.Restaurant;
 import com.example.lunchdroid.data.RestaurantCollection;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Context;
-import android.util.Log;
-import android.view.Menu;
-import android.widget.Button;
-import android.widget.TextView;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.content.Intent;
-import android.graphics.Color;
 
-import java.util.Date;
 
-import android.util.Log;
-
-public class ContactActivity extends Activity {
+public class ContactActivity extends SherlockActivity {
 
 	Button button;
 	TextView restaurant_text;
@@ -31,6 +32,9 @@ public class ContactActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contact);
 		
+		ActionBar mActionBar = getSupportActionBar();
+		mActionBar.setDisplayHomeAsUpEnabled(true);
+		
 		Intent intent = getIntent();
 		int restaurant_id = intent.getIntExtra("restaurantid", 0);
 		restaurant = RestaurantCollection.getInstance().getRestaurantById(restaurant_id);
@@ -38,8 +42,7 @@ public class ContactActivity extends Activity {
 		
 		Log.w("Lunchdroid",
 				"Contact: restaurent_id: " + restaurant_id + "restaurant_name: " + restaurant_name);
-		
-		
+				
 		setFields();
 		addListenerOnPhoneButton();
 	}
@@ -47,26 +50,38 @@ public class ContactActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.contact, menu);
+		getSupportMenuInflater().inflate(R.menu.contact, menu);
 		return true;
 	}
 
-	public void addListenerOnPhoneButton() {
-		 
+	public void addListenerOnPhoneButton() {		 
 		final Context context = this;
 		
 		button = (Button) findViewById(R.id.phoneButton);
 		button.setText("Anrufen: " + restaurant.getRestaurantTelefon());
-		button.setBackgroundColor(Color.WHITE);
+		button.setBackgroundColor(Color.DKGRAY);
  
 		button.setOnClickListener(new OnClickListener() {
  
 			@Override
 			public void onClick(View arg0) {
-
 				PhoneCall.call(restaurant.getRestaurantTelefon(), (Activity) context); 
 			}
 		});
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	    	finish();	        
+	        //NavUtils.navigateUpFromSameTask(this);
+	    	//this.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK)); 
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+	    }
 	}
 	
 	public void setFields() {

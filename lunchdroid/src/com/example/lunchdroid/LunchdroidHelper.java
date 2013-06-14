@@ -77,24 +77,57 @@ public final class LunchdroidHelper {
 		Calendar date2 = Calendar.getInstance();
 		return dayNames[date2.get(Calendar.DAY_OF_WEEK)];
 	}
-	
-	public static String getNextWorkdayDayname(){
+
+	public static String getNextWorkdayDayname() {
 		String name = getTodayDayname();
-		if(name.equalsIgnoreCase("saturday") || name.equalsIgnoreCase("sunday")){
+		if (name.equalsIgnoreCase("saturday")
+				|| name.equalsIgnoreCase("sunday")) {
 			return "monday";
 		}
 		return name;
 	}
-	
+
 	@SuppressLint("DefaultLocale")
-	public static String getDistanceText(int meters){		
-		if(meters >= 1000 && meters < 100000){
-			double km = (double)meters / 1000;
+	public static String getDistanceText(int meters) {
+		if (meters >= 1000 && meters < 100000) {
+			double km = (double) meters / 1000;
 			return String.format("%d.2km", Math.round(km));
-		}else if(meters >= 100000){
+		} else if (meters >= 100000) {
 			return "";
-		}else{
+		} else {
 			return String.format("  %dm", meters);
 		}
+	}
+
+	public static int getNextWorkDayNumber() {
+		String name = getNextWorkdayDayname();
+		if (name.equalsIgnoreCase("monday")) {
+			return 0;
+		} else if (name.equalsIgnoreCase("tuesday")) {
+			return 1;
+		} else if (name.equalsIgnoreCase("wednesday")) {
+			return 2;
+		} else if (name.equalsIgnoreCase("thursday")) {
+			return 3;
+		} else if (name.equalsIgnoreCase("friday")) {
+			return 4;
+		}
+		return 0;
+	}
+
+	public static Date getWeekDayByNumber(int daykey) {
+		switch (daykey) {
+		case 0:
+			return getDateDayOfWeek("monday");
+		case 1:
+			return getDateDayOfWeek("tuesday");
+		case 2:
+			return getDateDayOfWeek("wednesday");
+		case 3:
+			return getDateDayOfWeek("thursday");
+		case 4:
+			return getDateDayOfWeek("friday");
+		}
+		return null;
 	}
 }
