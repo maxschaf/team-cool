@@ -1,4 +1,4 @@
-package com.example.lunchdroid.test.junit;
+package com.example.lunchdroid.tests.junit;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

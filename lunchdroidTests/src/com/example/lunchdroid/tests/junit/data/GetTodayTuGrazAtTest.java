@@ -1,4 +1,4 @@
-package com.example.lunchdroid.test.junit.data;
+package com.example.lunchdroid.tests.junit.data;
 
 import java.util.Date;
 

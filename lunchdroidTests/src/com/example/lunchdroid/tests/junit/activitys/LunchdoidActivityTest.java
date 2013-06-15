@@ -1,4 +1,4 @@
-package com.example.lunchdroid.test.junit.activitys;
+package com.example.lunchdroid.tests.junit.activitys;
 
 import com.example.lunchdroid.LunchdroidActivity;
 import com.jayway.android.robotium.solo.Solo;
