@@ -25,10 +25,20 @@ public class LunchdroidActivityTest extends
 	}
 
 	public void testActivity() {
+<<<<<<< HEAD
 		solo.assertCurrentActivity("Wrong Activity", LunchdroidActivity.class);
 		solo.clickOnText("Lebensgfyhl");
 		solo.goBack();
+=======
+		 solo.assertCurrentActivity("Wrong Activity",
+		 LunchdroidActivity.class);
+		 solo.clickOnText("Lebensgfyhl");
+		 solo.goBack();
+
+>>>>>>> 2a88e61ed4b9b7aef5fa27434cb35fe3d417a053
 
 	}
+	
+
 
 }
