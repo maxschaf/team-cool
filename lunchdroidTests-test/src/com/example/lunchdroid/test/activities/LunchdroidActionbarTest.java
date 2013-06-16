@@ -33,6 +33,10 @@ ActivityInstrumentationTestCase2<LunchdroidActivity>{
 		assertTrue("Title not correct",solo.getCurrentActivity().getActionBar().getTitle().toString().equals("Lunchdroid"));
 		assertTrue("wrong Tab selected", solo.getCurrentActivity().getActionBar().getSelectedTab().getText().toString().equals("Favorit"));
 		
+		solo.clickOnText("Distanz");
+		solo.sleep(500);
+		assertTrue("wrong Tab selected", solo.getCurrentActivity().getActionBar().getSelectedTab().getText().toString().equals("Distanz"));
+		
 
 	}
 }
