@@ -35,12 +35,14 @@ public class LunchdroidActivityCheckboxTest extends
 
 		for (int i = 0; i < 8; i++) { // mark and unmark all
 			solo.clickOnCheckBox(i); // mark
+			assertTrue("Marking failed", solo.isCheckBoxChecked(i)); // assert if checkbox is checked
 			solo.clickOnCheckBox(i); // unmark
+			assertFalse("Unmarking failed", solo.isCheckBoxChecked(i)); // check if unmarked 
 		}
 
 		for (int i = 0; i < 8; i++) {
 			solo.clickOnCheckBox(i); // mark all
-
+			assertTrue("Marking all failed", solo.isCheckBoxChecked(i));
 		}
 		solo.goBack();
 
