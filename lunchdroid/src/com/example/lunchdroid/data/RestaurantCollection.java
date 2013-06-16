@@ -98,4 +98,8 @@ public final class RestaurantCollection {
 	protected synchronized int getNewId() {
 		return mRestaurantId++;
 	}
+	
+	public int getNumberOfRestaurants() {
+		return mRestaurantId + 1;
+	}
 }
