@@ -1,7 +1,10 @@
 package com.example.lunchdroid.test.activities;
 
+import com.example.lunchdroid.ContactActivity;
 import com.example.lunchdroid.LunchdroidActivity;
+import com.example.lunchdroid.R;
 import com.example.lunchdroid.RestaurantDetailActivity;
+import com.example.lunchdroid.data.RestaurantCollection;
 import com.jayway.android.robotium.solo.Solo;
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -24,16 +27,48 @@ public class LunchdroidActivityTest extends
 		super.tearDown();
 	}
 
-	public void testActivity() {
-	
+	public void testClickOnRestaurants() {
+		
 		solo.assertCurrentActivity("Wrong Start Activity", LunchdroidActivity.class);
-		solo.clickOnText("Lebensgfyhl");
-		solo.waitForActivity(RestaurantDetailActivity.class);
-		solo.assertCurrentActivity("Activity didn't change", RestaurantDetailActivity.class);
-		solo.goBack();
-		solo.waitForActivity(LunchdroidActivity.class);
-		solo.assertCurrentActivity("Didn't change back to Lunchdroid Activity", LunchdroidActivity.class);
-
+		
+		RestaurantCollection restaurantcollection = RestaurantCollection.getInstance();
+		
+		for (int i = 1; i < restaurantcollection.size() ; i++) {
+			
+			solo.clickLongInList(i,1);
+			solo.sleep(500);
+			solo.waitForActivity(RestaurantDetailActivity.class);
+			solo.assertCurrentActivity("Activity didn't change", RestaurantDetailActivity.class);
+			solo.goBack();
+			solo.sleep(500);
+			solo.waitForActivity(LunchdroidActivity.class);
+			solo.assertCurrentActivity("Didn't change back to Lunchdroid Activity", LunchdroidActivity.class);
+			
+		}
+	
 	}
+	
+	public void testActivityChanges(){
+		
+		solo.assertCurrentActivity("Wrong Start Activity", LunchdroidActivity.class);
+		solo.clickInList(1, 1);
+		solo.sleep(500);
+		solo.waitForActivity(RestaurantDetailActivity.class);
+		solo.assertCurrentActivity("Activity didn't change to RestaurantDetail", RestaurantDetailActivity.class);
+		solo.clickOnView(solo.getCurrentActivity().findViewById(R.id.restaurant_name));
+		solo.sleep(500);
+		solo.waitForActivity(ContactActivity.class);
+		solo.assertCurrentActivity("Activity didn't change to ContactActivity", ContactActivity.class);
+		solo.goBack();
+		solo.sleep(500);
+		solo.waitForActivity(RestaurantDetailActivity.class);
+		solo.assertCurrentActivity("Activity didn't change to RestaurantDetail", RestaurantDetailActivity.class);
+		solo.goBack();
+		solo.sleep(500);
+		solo.waitForActivity(LunchdroidActivity.class);
+		solo.assertCurrentActivity("Activity didn't change to RestaurantDetail", LunchdroidActivity.class);
+
+		
+		}
 
 }
