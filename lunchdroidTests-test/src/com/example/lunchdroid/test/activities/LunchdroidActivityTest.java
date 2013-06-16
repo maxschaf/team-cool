@@ -1,8 +1,8 @@
 package com.example.lunchdroid.test.activities;
 
 import com.example.lunchdroid.LunchdroidActivity;
+import com.example.lunchdroid.RestaurantDetailActivity;
 import com.jayway.android.robotium.solo.Solo;
-
 import android.test.ActivityInstrumentationTestCase2;
 
 public class LunchdroidActivityTest extends
@@ -25,9 +25,14 @@ public class LunchdroidActivityTest extends
 	}
 
 	public void testActivity() {
-		solo.assertCurrentActivity("Wrong Activity", LunchdroidActivity.class);
+	
+		solo.assertCurrentActivity("Wrong Start Activity", LunchdroidActivity.class);
 		solo.clickOnText("Lebensgfyhl");
+		solo.waitForActivity(RestaurantDetailActivity.class);
+		solo.assertCurrentActivity("Activity didn't change", RestaurantDetailActivity.class);
 		solo.goBack();
+		solo.waitForActivity(LunchdroidActivity.class);
+		solo.assertCurrentActivity("Didn't change back to Lunchdroid Activity", LunchdroidActivity.class);
 
 	}
 
