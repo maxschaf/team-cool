@@ -3,6 +3,8 @@ package com.example.lunchdroid.test.data;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.util.Log;
+
 import com.example.lunchdroid.LunchdroidHelper;
 import com.example.lunchdroid.data.Lunch;
 import com.example.lunchdroid.data.Restaurant;
@@ -39,6 +41,35 @@ public class RestaurantCollectionTest extends TestCase {
 		assertNotNull(testcollection);
 		assertTrue(testcollection.getNumberOfRestaurants() == 5);
 				
+	}
+	
+	public void testRestaurantNumberLimit() throws Exception {
+		
+		RestaurantCollection testcollection = RestaurantCollection.getInstance();
+
+		
+	    ArrayList<Lunch> testList = new ArrayList<Lunch>();
+	    Lunch lunch1 = new Lunch("test1", "1");
+	    testList.add(lunch1);
+	    Date testdate = LunchdroidHelper.getDateTodayZeroTime();
+	    
+	    int size = 0;
+	    size = testcollection.getNumberOfRestaurants();
+	    
+	    for(int i = 0; i < 500; i++) {
+	    
+		size = testcollection.getNumberOfRestaurants();
+	    	
+		Restaurant restaurant1 = new Restaurant("testRestaurant" + i, "testAddress1", "testTel1", testList);
+		testcollection.addItem(testdate, restaurant1);
+		
+		Log.w("Lunchdroid",
+				String.valueOf(size) + " items in RestaurantCollection.");
+		
+		assertTrue(testcollection.getNumberOfRestaurants() == (size + 1));
+		
+	    }
+	    
 	}
 	
 }
