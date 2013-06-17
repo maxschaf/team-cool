@@ -28,7 +28,6 @@ public class LunchdroidSingleCheckboxTest8 extends
 		solo.assertCurrentActivity("Wrong Activity", LunchdroidActivity.class);
 
 		if (solo.isCheckBoxChecked(7)) {
-			assertTrue("Checkbox is not checked", solo.isCheckBoxChecked(7));
 			solo.clickOnCheckBox(7);  //set starting state		
 		}
 		solo.clickOnCheckBox(7);
