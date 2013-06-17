@@ -74,6 +74,10 @@ public class ContactActivity extends SherlockActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 	    // Respond to the action bar's Up/Home button
+	    case R.id.action_settings:
+	    	Intent intent = new Intent(this, SettingsActivity.class);
+			startActivity(intent);
+			return true;
 	    case android.R.id.home:
 	    	finish();	        
 	        //NavUtils.navigateUpFromSameTask(this);
