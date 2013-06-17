@@ -5,6 +5,7 @@ import com.example.lunchdroid.data.GetTodayTuGrazAt;
 import com.example.lunchdroid.data.PersistentPreferencesCollection;
 import com.example.lunchdroid.geo.Locator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +16,7 @@ import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 public class LunchdroidActivity extends SherlockFragmentActivity {
 	
@@ -114,5 +116,15 @@ public class LunchdroidActivity extends SherlockFragmentActivity {
         getSupportMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent = new Intent(this, SettingsActivity.class);
+		
+
+		startActivity(intent);
+		return super.onOptionsItemSelected(item);
+	}
+    
 
 }
