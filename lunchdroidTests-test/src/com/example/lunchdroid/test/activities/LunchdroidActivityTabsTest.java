@@ -34,13 +34,18 @@ public class LunchdroidActivityTabsTest extends
 		solo.scrollToSide(Solo.LEFT);
 		solo.scrollToSide(Solo.LEFT);
 		solo.scrollToSide(Solo.LEFT); // go to Monday
+		assertFalse("wrong Tab selected", solo.searchText("Montag"));
+        solo.scrollToSide(Solo.RIGHT);
+	    assertFalse("wrong Tab selected", solo.searchText("Dienstag"));
+        solo.scrollToSide(Solo.RIGHT);
+		assertFalse("wrong Tab selected", solo.searchText("Mittwoch"));
+        solo.scrollToSide(Solo.RIGHT);
+		assertFalse("wrong Tab selected", solo.searchText("Donnerstag"));
+        solo.scrollToSide(Solo.RIGHT);
+		assertFalse("wrong Tab selected", solo.searchText("Freitag"));
 
-		
-        solo.scrollToSide(Solo.RIGHT);
-        solo.scrollToSide(Solo.RIGHT);
-        solo.scrollToSide(Solo.RIGHT);
-        solo.scrollToSide(Solo.RIGHT);
-
+		solo.goBack();
+		solo.assertCurrentActivity("Wrong Start Activity", LunchdroidActivity.class);
 	}
 
 }
