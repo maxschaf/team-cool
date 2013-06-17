@@ -15,12 +15,18 @@
         android:layout_above="@+id/restaurant"
         android:layout_marginBottom="10dp"
         android:choiceMode="singleChoice" >
-
     </ListView>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/restaurant"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/white" />
 
     <TextView
         android:id="@+id/restaurant"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/restaurant_name"
         android:layout_alignParentLeft="true"
@@ -30,7 +36,7 @@
 
     <TextView
         android:id="@+id/restaurant_name"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/restaurant"
         android:layout_alignParentBottom="true"
