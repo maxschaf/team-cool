@@ -102,4 +102,12 @@ public final class RestaurantCollection {
 	public int getNumberOfRestaurants() {
 		return mRestaurantId + 1;
 	}
+	
+	//handle with care
+	public void reset(){
+		mItems.clear();
+		mIds.clear();
+		mRestaurantId = -1;
+		ready = false;
+	}
 }

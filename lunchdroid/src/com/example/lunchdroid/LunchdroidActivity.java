@@ -3,6 +3,7 @@ package com.example.lunchdroid;
  
 import com.example.lunchdroid.data.GetTodayTuGrazAt;
 import com.example.lunchdroid.data.PersistentPreferencesCollection;
+import com.example.lunchdroid.data.RestaurantCollection;
 import com.example.lunchdroid.geo.Locator;
 
 import android.content.Intent;
@@ -27,6 +28,7 @@ public class LunchdroidActivity extends SherlockFragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        RestaurantCollection.getInstance().reset();
 		Locator.getInstance(this).startLocationListener();
 		PersistentPreferencesCollection.getInstance().addPersistentPreference(this, "FAV");
 		GetTodayTuGrazAt dl = new GetTodayTuGrazAt(this);
