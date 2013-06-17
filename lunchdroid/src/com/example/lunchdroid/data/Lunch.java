@@ -12,12 +12,12 @@ public class Lunch {
 
 	private final String mPrice;
 
-	Lunch(String name, String price){
+	public Lunch(String name, String price){
 		mName = name;
 		mPrice = price;
 	}
 	
-	Lunch(String name){
+	public Lunch(String name){
 		mName = name;
 		mPrice = "";
 	}
