@@ -17,7 +17,7 @@ public class RestaurantCollectionTest extends TestCase {
 	public void testRestaurantCollectionCreation() throws Exception {
 		
 		RestaurantCollection testcollection = RestaurantCollection.getInstance();
-		
+		testcollection.reset();
 	    ArrayList<Lunch> testList = new ArrayList<Lunch>();
 	    Lunch lunch1 = new Lunch("test1", "1");
 	    Lunch lunch2 = new Lunch("test2", "2");	    
