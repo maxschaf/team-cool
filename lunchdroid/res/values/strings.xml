@@ -7,7 +7,7 @@
     <string name="title_activity_contact">Kontakt</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_phone_call">PhoneCall</string>
-    <string name="hello_world">Developer: \nMax Schafzahl \nMarc Manninger \nMax Reinthaler \nMarkus Schmid \nDaniel Fussenegger\n\nTUG Studentproject \n\nComplains:\nmarc.manninger@student.tugraz.at\n </string>
+    <string name="hello_world">Developer: \nMax Schafzahl \nMarc Manninger \nMax Reinthaler \nMarkus Schmid \nDaniel Fussenegger\n\nTUG Studentproject \n\nComplains:\nmaximilian.weiss-reinthaler@student.tugraz.at\n </string>
 
     <!-- contact layout -->
     <string name="contact_phone_button_text"></string>
