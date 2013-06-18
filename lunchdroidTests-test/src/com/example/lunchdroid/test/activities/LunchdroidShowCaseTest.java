@@ -1,11 +1,15 @@
 package com.example.lunchdroid.test.activities;
 
+import java.util.List;
+
 import com.example.lunchdroid.ContactActivity;
 import com.example.lunchdroid.LunchdroidActivity;
 import com.example.lunchdroid.R;
 import com.example.lunchdroid.RestaurantDetailActivity;
+import com.example.lunchdroid.data.Restaurant;
 import com.example.lunchdroid.data.RestaurantCollection;
 import com.jayway.android.robotium.solo.Solo;
+import com.example.lunchdroid.*;
 
 import android.test.ActivityInstrumentationTestCase2;
 
@@ -29,40 +33,41 @@ public class LunchdroidShowCaseTest extends
 	}
 
 	public void testShowCase() throws InterruptedException {
+		List<Restaurant> todaysRestaurants = RestaurantCollection.getInstance().getRestaurantsByDay(LunchdroidHelper.getDateDayOfWeek(LunchdroidHelper.getNextWorkdayDayname()));
+	    int restaurantSize = todaysRestaurants.size();	 
 		
 		
-		RestaurantCollection restaurantcollection = RestaurantCollection.getInstance();
 		solo.assertCurrentActivity("Wrong Activity", LunchdroidActivity.class);
 
-		for (int i = 0; i < restaurantcollection.size() ; i++) { // unmark all that are marked (prepairing test)
+		for (int i = 0; i < restaurantSize ; i++) { // unmark all that are marked (prepairing test)
 			if (solo.isCheckBoxChecked(i)) {
 				solo.clickOnCheckBox(i);
 			}
 		}
-		for (int i = 0; i < restaurantcollection.size() ; i++) { // mark all objects as favorit
+		for (int i = 0; i < restaurantSize ; i++) { // mark all objects as favorit
 			solo.clickOnCheckBox(i);
 			assertTrue("Marking all checkboxes failed", solo.isCheckBoxChecked(i));
 		}
 		solo.scrollToSide(Solo.RIGHT);
-		for (int i = 0; i < restaurantcollection.size() ; i++) {
+		for (int i = 0; i < restaurantSize ; i++) {
 			assertTrue("Not a Favorit", solo.isCheckBoxChecked(i));
 		}
 
 		solo.scrollToSide(Solo.LEFT);
 		solo.sleep(1000);
 		
-		for (int i = 0; i < restaurantcollection.size()-1 ; i++) { // unmark all that are marked (prepairing test)
-			if (solo.isCheckBoxChecked(i)) {
-				solo.clickOnCheckBox(i);
+		if (restaurantSize > 0) {
+			for (int i = 0; i < restaurantSize -1 ; i++) { // unmark all that are marked (prepairing test)
+				if (solo.isCheckBoxChecked(i)) {
+					solo.clickOnCheckBox(i);
+				}
 			}
+			solo.scrollToSide(Solo.RIGHT);
+			solo.sleep(1000);
+			solo.scrollToSide(Solo.LEFT);
+			solo.sleep(1000);
 		}
-		solo.scrollToSide(Solo.RIGHT);
-		solo.sleep(1000);
-		solo.scrollToSide(Solo.LEFT);
-		solo.sleep(1000);
-
-		
-		for (int i = 1; i < restaurantcollection.size() ; i++) {
+		for (int i = 1; i < restaurantSize; i++) {
 			
 			solo.assertCurrentActivity("Wrong Start Activity", LunchdroidActivity.class);
 			solo.clickInList(i, 1);

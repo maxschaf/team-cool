@@ -1,9 +1,13 @@
 package com.example.lunchdroid.test.activities;
 
+import java.util.List;
+
 import com.example.lunchdroid.ContactActivity;
 import com.example.lunchdroid.LunchdroidActivity;
+import com.example.lunchdroid.LunchdroidHelper;
 import com.example.lunchdroid.R;
 import com.example.lunchdroid.RestaurantDetailActivity;
+import com.example.lunchdroid.data.Restaurant;
 import com.example.lunchdroid.data.RestaurantCollection;
 import com.jayway.android.robotium.solo.Solo;
 import android.test.ActivityInstrumentationTestCase2;
@@ -31,9 +35,10 @@ public class LunchdroidActivityTest extends
 		
 		solo.assertCurrentActivity("Wrong Start Activity", LunchdroidActivity.class);
 		
-		RestaurantCollection restaurantcollection = RestaurantCollection.getInstance();
+		List<Restaurant> todaysRestaurants = RestaurantCollection.getInstance().getRestaurantsByDay(LunchdroidHelper.getDateDayOfWeek(LunchdroidHelper.getNextWorkdayDayname()));
+	    int restaurantSize = todaysRestaurants.size();	 
 		
-		for (int i = 1; i < restaurantcollection.size() ; i++) {
+		for (int i = 1; i < restaurantSize ; i++) {
 			
 			solo.clickLongInList(i,1);
 			solo.sleep(500);

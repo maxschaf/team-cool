@@ -1,6 +1,11 @@
 package com.example.lunchdroid.test.activities;
 
+import java.util.List;
+
 import com.example.lunchdroid.LunchdroidActivity;
+import com.example.lunchdroid.LunchdroidHelper;
+import com.example.lunchdroid.data.Restaurant;
+import com.example.lunchdroid.data.RestaurantCollection;
 import com.jayway.android.robotium.solo.Solo;
 
 import android.test.ActivityInstrumentationTestCase2;
@@ -25,15 +30,21 @@ public class LunchdroidSingleCheckboxTest5 extends
 	}
 
 	public void testSingleCheckbox() {
+		List<Restaurant> todaysRestaurants = RestaurantCollection.getInstance().getRestaurantsByDay(LunchdroidHelper.getDateDayOfWeek(LunchdroidHelper.getNextWorkdayDayname()));
+	    int restaurantSize = todaysRestaurants.size();	 
+	    
 		solo.assertCurrentActivity("Wrong Activity", LunchdroidActivity.class);
 
-		if (solo.isCheckBoxChecked(4)) {
-			solo.clickOnCheckBox(4);  //set starting state		
+		if (restaurantSize > 4) 
+		{
+			if (solo.isCheckBoxChecked(4)) {
+				solo.clickOnCheckBox(4);  //set starting state		
+			}
+			solo.clickOnCheckBox(4);
+			assertTrue("Checkbox is not checked", solo.isCheckBoxChecked(4));
+			solo.clickOnCheckBox(4);
+			assertFalse("Checkbox is checked", solo.isCheckBoxChecked(4));
 		}
-		solo.clickOnCheckBox(4);
-		assertTrue("Checkbox is not checked", solo.isCheckBoxChecked(4));
-		solo.clickOnCheckBox(4);
-		assertFalse("Checkbox is checked", solo.isCheckBoxChecked(4));
 	}
 
 }
